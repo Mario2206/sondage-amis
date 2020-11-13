@@ -8,9 +8,9 @@ try {
     $router = new Router($_GET["url"]);
 
     $router->get("/", function () {
-        $controller = new HomeController();
-        $controller->homepage();
-    });
+        $homeController = new HomeController();
+        $homeController->homepage();
+    });   
 
     $router->get("/test", function () {
         echo "test";
