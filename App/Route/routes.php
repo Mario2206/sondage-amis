@@ -10,13 +10,12 @@ try {
     $router->get("/", function () {
         $homeController = new HomeController();
         $homeController->homepage();
-    });   
-
-    $router->get("/test", function () {
-        echo "test";
     });
 
+
     $router->parse();
+
+
 
 } catch(Exception $e) {
     echo "<strong>Error : $e</strong>";
