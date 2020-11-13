@@ -8,5 +8,4 @@ require("../Core/Autoloader.php");
 
 Autoloader::start();
 
-$homeController = new HomeController();
-$homeController->homepage();
+require("../App/Route/routes.php");
