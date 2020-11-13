@@ -5,6 +5,7 @@ use Core\Autoloader;
 
 
 require("../Core/Autoloader.php");
+require ('../Configuration/dbConfiguration.php');
 
 Autoloader::start();
 
