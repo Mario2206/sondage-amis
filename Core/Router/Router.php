@@ -14,14 +14,19 @@ class Router implements IERouter {
     const HTTP_DELETE = "DELETE";
     const HTTP_PUT = "PUT";
 
+    /**
+     * CONTROLLER NAMESPACE
+     */
+    private string $_controllerNameSpace = "Controller\\";
+
     /*
      * CURRENT URL
      * **/
-    private $_url;
+    private string $_url;
     /*
      * FOR STORING ALL ROUTES
      * */
-    private $store = [
+    private array $store = [
         self::HTTP_GET => [],
         self::HTTP_POST => [],
         self::HTTP_PUT => [],
@@ -32,6 +37,10 @@ class Router implements IERouter {
     public function __construct( string $url )
     {
         $this->_url = trim($url, "/");
+    }
+
+    public function setControllerNameSpace (string $namespace) {
+        $this->_controllerNameSpace = $namespace;
     }
 
     /*
@@ -47,29 +56,29 @@ class Router implements IERouter {
      * @param string $path
      * @param function $action
      * **/
-    public function get (string $path, $action) : void {
-        $this->createRoute(self::HTTP_GET,$path, $action);
+    public function get (string $path, string $controller, string $action) : void {
+        $this->createRoute(self::HTTP_GET,$path, $controller, $action);
     }
 
     /*
      * CATCH HTTP POST REQUEST
      * **/
-    public function post (string $path, $action) : void {
-        $this->createRoute(self::HTTP_POST, $path, $action);
+    public function post (string $path, string $controller, string $action) : void {
+        $this->createRoute(self::HTTP_POST, $path, $controller, $action);
     }
 
     /*
      * CATCH HTTP DELETE REQUEST
      * **/
-    public function delete (string $path, $action) {
-        $this->createRoute(self::HTTP_DELETE, $path, $action);
+    public function delete (string $path, string $controller, string $action) {
+        $this->createRoute(self::HTTP_DELETE, $path, $controller, $action);
     }
 
     /*
      *CATCH PUT REQUEST
      *  **/
-    public function update (string $path, $action) {
-        $this->createRoute(self::HTTP_PUT, $path, $action);
+    public function update (string $path, string $controller, string $action) {
+        $this->createRoute(self::HTTP_PUT, $path, $controller, $action);
     }
 
     /*
@@ -78,14 +87,14 @@ class Router implements IERouter {
      * @param string $path
      * @param function $action
      * */
-    private function createRoute( string $method, string $path, $action) : void {
+    private function createRoute( string $method, string $path, string $controller, string $action) : void {
 
         $parts = explode(":", $path);
 
         $parts = array_map(function ($arg) {
             return trim($arg, "/");
         }, $parts);
-        $this->store[$method][] = new Route($parts[0], array_slice($parts, 1), $action);
+        $this->store[$method][] = new Route($parts[0], array_slice($parts, 1), $this->_controllerNameSpace . $controller, $action);
         
     }
 
@@ -97,7 +106,7 @@ class Router implements IERouter {
         $httpMethod = $_SERVER["REQUEST_METHOD"];
 
         $currentRoute = $this->parseRoutes($this->store[$httpMethod]);
-        
+
         if (!$currentRoute) {
             header("HTTP/1.0 404 Not Found");
             die();

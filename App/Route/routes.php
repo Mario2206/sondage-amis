@@ -7,10 +7,17 @@ try {
     
     $router = new Router($_GET["url"]);
 
-    $router->get("/", function () {
-        $homeController = new HomeController();
-        $homeController->homepage();
-    });
+    $router->setControllerNameSpace("App\\Controller\\");
+
+    $router->get("/", "HomeController", "homepage");
+
+    $router->get("/poll", "PollController", "pollsListPage");
+
+    $router->get("/poll/creation", "PollController", "createPollPage");
+
+    $router->post("/poll/creation", "PollController", "createPoll");
+
+    $router->get("/poll/created", "PollController", "confirmCreatePollPage");
 
 
     $router->parse();
