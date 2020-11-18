@@ -30,7 +30,7 @@ class Template implements ITemplate {
         $templateScripts = $this->_scriptNames;
         $templateStyles = $this->_stylesNames;
         
-        require(ROOT . "/View/" . $this->_templateViewName . ".php");
+        require(ROOT . "/App/View/" . $this->_templateViewName . ".php");
     }
 
     /**

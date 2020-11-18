@@ -8,7 +8,7 @@ class PollModel extends Model {
 
         const TABLE_NAME = "poll";
 
-        const KEYS = ["pollName", "description", "createdAt"];
+        const KEYS = ["pollName", "description", "createdAt", "user_id"];
 
         public function __construct()
         {
@@ -22,7 +22,7 @@ class PollModel extends Model {
          * 
          * @return int (last inserted id)
          */
-        public function insert(string $pollName, string $description, string $createdAt) {
+        public function insert(string $pollName, string $description, string $createdAt, string $user_id) {
            return $this->_insert(self::KEYS, func_get_args());
         }
 

@@ -27,6 +27,8 @@ class PollController extends Controller {
     }
 
     public function createPoll() {
+        //TEMP
+        $user_id = 0;
 
         $this->checkPostKeys($_POST, ["poll_name", "poll_description", "poll_questions", "poll_responses"]);
 
@@ -39,7 +41,7 @@ class PollController extends Controller {
         $pollDescription = htmlspecialchars($_POST['poll_description']);
 
         $pollModel = new PollModel();
-        $pollId = $pollModel->insert($pollName, $pollDescription, $date);
+        $pollId = $pollModel->insert($pollName, $pollDescription, $date, $user_id);
 
         if($pollId) {
 

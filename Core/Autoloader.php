@@ -9,6 +9,6 @@ class Autoloader {
     }
 
     private static function autoload($class) {
-        require("../$class.php");
+        require(ROOT . "/$class.php");
     }
 }
