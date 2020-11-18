@@ -7,7 +7,6 @@ use App\Model\PollModel;
 use App\Model\QuestionModel;
 use Core\Controller\Controller;
 use Core\Model\Converters\TypeConverter;
-use Core\View\Template\Template;
 use DateTime;
 
 
@@ -52,7 +51,7 @@ class PollController extends Controller {
                 $qId = $questionModel->insert($pollId, htmlspecialchars( $question ));
 
                 if($qId) {
-
+                    
                    if( $answerModel->insertMany($_POST["poll_responses"][$k],$qId ) ) {
 
                         $this->redirect(MAIN_PATH . "poll/created");
