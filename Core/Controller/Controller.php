@@ -2,6 +2,8 @@
 
 namespace Core\Controller;
 
+use Core\View\Template\ITemplate;
+
 class Controller {
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-use App\Controller\HomeController;
+
 use Core\Router\Router;
 
 try {
@@ -11,7 +11,7 @@ try {
 
     $router->get("/", "HomeController", "homepage");
 
-    $router->get("/poll", "PollController", "pollsListPage");
+    $router->get("/poll", "PollController", "pollListPage");
 
     $router->get("/poll/creation", "PollController", "createPollPage");
 

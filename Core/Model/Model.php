@@ -3,7 +3,7 @@
 namespace Core\Model;
 
 use Core\Database\Database;
-use Core\Model\Generators\QueryGenerator;
+use Core\Model\Generators\QueryBuilder;
 
 abstract class Model {
 
@@ -28,7 +28,7 @@ abstract class Model {
      */
     protected function _insert(array $keys, array $data) {
 
-        $query = QueryGenerator::generateInsertQuery($this->_tableName, $keys ,$data);
+        $query = QueryBuilder::insert($this->_tableName, $keys ,[$data]);
 
         $req = $this->_db->prepare($query);
 
@@ -40,11 +40,21 @@ abstract class Model {
        
     }
 
-    public function _insertMany (array $keys, array $dataGroup) {
+    /**
+     * For inserting multiple rows in database
+     * 
+     * @param array $keys (column names)
+     * @param array $dataGroup (group of data) eg : [0=> [...data for first row], 1 => [... data for second row]]
+     * 
+     * @return int (last insert id) | bool (false if the request failed)
+     * 
+     */
+    protected function _insertMany (array $keys, array $dataGroup) {
         
-        $query = QueryGenerator::generateInsertManyQuery($this->_tableName, $keys, $dataGroup);
+        $query = QueryBuilder::insert($this->_tableName, $keys, $dataGroup);
         $req = $this->_db->prepare($query);
         $dataForQuery = [];
+
         foreach($dataGroup as $data) {
             
             foreach($data as $entry) {
@@ -60,5 +70,43 @@ abstract class Model {
         } else return $req;
 
     }
+
+    /**
+     * For getting element from db table
+     *
+     * @param $table : string
+     * @param $filters : array ["key" => "value"]
+     * @param $wantedValue : array ["wantedValue"]
+     * @param $limit : array ["start-number", "offset-number"]
+     * @param $order : array ["by"=>key, "desc" => boolean]
+     *
+     * return array
+     * */
+    protected function _find(string $table, array $filters = [], array $wantedValue = ["*"], array $limit = [], array $order = [], bool $isRegex = false) : array {
+        $vars = [];
+ 
+        $query = QueryBuilder::select($wantedValue, $table);
+ 
+         if($filters) {
+ 
+             $query .= " " . QueryBuilder::filters(array_keys($filters),$isRegex);
+             $vars = array_values($filters);
+         }
+ 
+         if($limit) {
+             $query .= " " .  QueryBuilder::limit();
+             $vars= array_merge($vars, $limit);
+         }
+ 
+         if($order) {
+              $query =" " .  QueryBuilder::order($order["by"], $order["desc"] );
+         }
+       
+         $req = $this->_db->prepare($query);
+         $req->execute($vars);
+ 
+         return $req->fetchall();
+ 
+     }
 
 }

@@ -7,13 +7,16 @@ use App\Model\PollModel;
 use App\Model\QuestionModel;
 use Core\Controller\Controller;
 use Core\Model\Converters\TypeConverter;
+use Core\View\Template\Template;
 use DateTime;
 
 
 class PollController extends Controller {
 
-    public function pollsListPage () {
-        $this->render("pollsListView");
+    public function pollListPage () {
+        $pollModel = new PollModel();
+        $polls = $pollModel->find();
+        $this->render("pollListView", compact("polls"));
     } 
 
     public function createPollPage () {

@@ -25,6 +25,18 @@ class PollModel extends Model {
         public function insert(string $pollName, string $description, string $createdAt) {
            return $this->_insert(self::KEYS, func_get_args());
         }
+
+        /**
+         * For getting row(s) from Database
+         * 
+         * @param array $filters
+         * @param array $wantedValues (default : ["*"])
+         * @param array $limit [start, offset]
+         * @param array $order ["by"=> columnName, "desc"=>bool]
+         */
+        public function find (array $filters = [], array $wantedValue = ["*"], array $limit = [], array $order = []) {
+            return $this->_find(self::TABLE_NAME, $filters, $wantedValue, $limit, $order);
+        }
         
 
     }
