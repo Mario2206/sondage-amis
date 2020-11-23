@@ -15,8 +15,9 @@ class Template implements ITemplate {
 
     public function __construct(string $pageTitle, array $scriptsNames = [], array $stylesNames = [])
     {
+        
         $this->_title = $pageTitle;
-        $this->_scriptsNames = $scriptsNames;
+        $this->_scriptNames = $scriptsNames;
         $this->_stylesNames = $stylesNames;
     }
 
@@ -26,10 +27,11 @@ class Template implements ITemplate {
      * @param string $content 
      */
     public function render (string $content) : void{
+
         $templateTitle = $this->_title;
         $templateScripts = $this->_scriptNames;
         $templateStyles = $this->_stylesNames;
-        
+     
         require(ROOT . "/App/View/" . $this->_templateViewName . ".php");
     }
 
