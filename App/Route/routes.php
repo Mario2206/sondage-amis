@@ -19,6 +19,7 @@ try {
 
     $router->get("/poll/created", "PollController", "confirmCreatePollPage");
 
+    $router->get("/register", "UserController", "registerPage");
 
     $router->parse();
 
