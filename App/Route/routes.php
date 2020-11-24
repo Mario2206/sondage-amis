@@ -21,6 +21,8 @@ try {
 
     $router->get("/register", "UserController", "registerPage");
 
+    $router->post("/register", "UserController", "register");
+
     $router->parse();
 
 
