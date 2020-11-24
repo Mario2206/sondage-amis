@@ -36,6 +36,6 @@ ob_start()
     
 <?php 
     $content = ob_get_clean();
-    $temp = new Template("List des sondages");
+    $temp = new Template("Liste des sondages");
     $temp->render($content);
 ?>
