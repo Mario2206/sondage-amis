@@ -35,7 +35,7 @@ class PollModel extends Model {
          * @param array $order ["by"=> columnName, "desc"=>bool]
          */
         public function find (array $filters = [], array $wantedValue = ["*"], array $limit = [], array $order = []) {
-            return $this->_find(self::TABLE_NAME, $filters, $wantedValue, $limit, $order);
+            return $this->_find($filters, $wantedValue, $limit, $order);
         }
         
 

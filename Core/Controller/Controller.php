@@ -2,6 +2,7 @@
 
 namespace Core\Controller;
 
+use Core\Tools\Session;
 use Core\View\Template\ITemplate;
 
 class Controller {
@@ -15,8 +16,14 @@ class Controller {
     } 
 
     protected function redirect (string $path) {
-        header("Location:" . $path);
+        header("Location:" . MAIN_PATH . $path);
         die();
+    }
+
+    protected function protectPageFor (string $role, string $redirectionRoute) {
+        if(!Session::get($role)) {
+            $this->redirect($redirectionRoute);
+        }
     }
 
 

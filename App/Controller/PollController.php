@@ -8,15 +8,22 @@ use App\Model\QuestionModel;
 use Core\Controller\Controller;
 use Core\Model\Converters\TypeConverter;
 use Core\Tools\Cleaner;
+use Core\Tools\Session;
 use Core\Validator\ArrayValidator;
 use DateTime;
 
 
 class PollController extends Controller {
 
+    public function __construct()
+    {
+        $this->protectPageFor("user", "/login");
+    }
+
     public function pollListPage () {
+
         $pollModel = new PollModel();
-        $polls = $pollModel->find();
+        $polls = $pollModel->find(["idUser"=>$user->userId]);
         $this->render("pollListView", compact("polls"));
     } 
 

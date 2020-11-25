@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 13 nov. 2020 à 18:33
+-- Généré le : mer. 25 nov. 2020 à 21:03
 -- Version du serveur :  5.7.24
--- Version de PHP : 7.2.19
+-- Version de PHP : 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,17 @@ CREATE TABLE `answers` (
   `nVoter` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
   `answerId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `friends`
+--
+
+CREATE TABLE `friends` (
+  `idUser` int(11) NOT NULL,
+  `idFriend` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -84,10 +95,17 @@ CREATE TABLE `users` (
   `firstName` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `lastName` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `password` int(11) NOT NULL,
+  `password` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `idUser` int(11) NOT NULL,
-  `connexion` tinyint(1) NOT NULL
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`firstName`, `lastName`, `email`, `password`, `idUser`, `username`) VALUES
+('Mathieu', 'JeSaisPAs', 'mario@mail.com', '$2y$10$xDL09.HTDXlHG.wp3IQFvuCI4nuxwLjNFthldvu2P26J4Ax.zCAz2', 1, 'Mario2206');
 
 --
 -- Index pour les tables déchargées
@@ -156,7 +174,7 @@ ALTER TABLE `tchatmessages`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -53,7 +53,7 @@
             </div>
         </form>
         <p>
-            <a href="inscription.php">
+            <a href="<?= MAIN_PATH ?>/register">
                 Inscription
             </a>
         </p>

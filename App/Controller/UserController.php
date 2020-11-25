@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserModel;
 use Core\Controller\Controller;
+use Core\Tools\Session;
 use Core\Validator\stringValidator;
 use Exception;
 
@@ -72,7 +73,9 @@ class UserController extends Controller{
                 throw new Exception("mot de passe incorrect");
             }
 
-            echo "connecté";
+            Session::set("user", $existingUser);
+
+            $this->redirect("/poll");
 
         }else{
             throw new Exception("pseudo incorrect");

@@ -2,6 +2,9 @@
 
 use Core\Autoloader;
 
+//START SESSION
+session_start();
+
 //GLOBAL CONFIGURATION FILE
 require("../Configuration/configuration.php");
 
