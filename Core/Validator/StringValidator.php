@@ -34,11 +34,17 @@ class StringValidator {
         return $this;
     }
 
-    public function checkRetype(string $password){
-        if($this->value != $password){
+    public function checkRetype(string $passwordRetype){
+        if($this->value != $passwordRetype){
             $this->error[] = "Les deux mots de passes ne correspondes pas";
         }
         return $this;
     }
 
+    public function checkPassword(string $password){
+        if(!password_verify($this->value, $password)){
+            $this->error[] = "Le mot de passe est incorrect";
+        }
+        return $this;
+    }
 }

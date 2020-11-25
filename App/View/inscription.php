@@ -62,7 +62,7 @@
                 }
             }
         ?>
-        <form action="<?= MAIN_PATH."register" ?>" method="post">
+        <form action="<?= MAIN_PATH."/register" ?>" method="post">
                 <h2 class="text-center">Inscription</h2>       
                 <div class="form-group">
                     <input type="text" name="firstName" class="form-control" placeholder="First name" required="required" autocomplete="off">

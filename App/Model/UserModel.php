@@ -13,7 +13,8 @@ class UserModel extends Model{
     }
 
     public function findOne(array $filters, array $wantedValues=["*"]){
-        return $this->_find($filters, $wantedValues);
+        $user = $this->_find($filters, $wantedValues);
+        return $user ? $user[0] : [];
     }
 
     public function save(string $pseudo, string $email, string $password, string $firstName, string $lastName){

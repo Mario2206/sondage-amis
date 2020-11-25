@@ -9,6 +9,12 @@ use Exception;
 
 
 class UserController extends Controller{
+    private $userModel;
+
+    public function __construct(){
+        $this->userModel = new UserModel();
+    }   
+
     public function registerPage() {
         $this->render("inscription");
 
@@ -34,16 +40,43 @@ class UserController extends Controller{
             throw new Exception("Erreur lors de l'inscription");
         }
 
-        $userModel = new UserModel();
-        $existedUser = $userModel->findOne(["username" =>$_POST["pseudo"], "email" =>$_POST["email"]]);
+        
+        $existedUser = $this->userModel->findOne(["username" =>$_POST["pseudo"], "email" =>$_POST["email"]]);
         if(!$existedUser){
-            $result = $userModel->save(
+            $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
+            $result = $this->userModel->save(
                 $_POST["pseudo"],
                 $_POST["email"],
-                $_POST["password"],
+                $passwordHash,
                 $_POST["firstName"],
                 $_POST["lastName"]
             );
+        }  // reponse si l'utilisateur existe déjà
+    }
+
+    public function loginPage(){
+        $this->render("connexion");
+    }
+
+    public function login(){
+        $this->checkPostKeys($_POST, ["pseudo", "password"]);
+        
+        $existingUser = $this->userModel->findOne(["username" =>$_POST["pseudo"]]);
+
+        if($existingUser){
+
+            $verifyPassword = new StringValidator($_POST["password"]);
+            $verifyPassword->checkPassword($existingUser->password);
+
+            if($verifyPassword->getErrors()){
+                throw new Exception("mot de passe incorrect");
+            }
+
+            echo "connecté";
+
+        }else{
+            throw new Exception("pseudo incorrect");
         }
+        
     }
 }

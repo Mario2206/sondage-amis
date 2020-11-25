@@ -23,6 +23,10 @@ try {
 
     $router->post("/register", "UserController", "register");
 
+    $router->get("/login", "UserController", "loginPage");
+
+    $router->post("/login", "UserController", "login");
+
     $router->parse();
 
 
