@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 25 nov. 2020 à 21:03
+-- Généré le : mer. 25 nov. 2020 à 21:25
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.12
 
@@ -52,6 +52,7 @@ CREATE TABLE `friends` (
 --
 
 CREATE TABLE `poll` (
+  `idUser` int(11) NOT NULL,
   `pollName` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `createdAt` datetime NOT NULL,
