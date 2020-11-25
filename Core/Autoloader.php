@@ -9,6 +9,7 @@ class Autoloader {
     }
 
     private static function autoload($class) {
-        require(ROOT . "/$class.php");
+        $path= ROOT."/".str_replace("\\", "/", $class).".php";
+        require($path);
     }
 }
