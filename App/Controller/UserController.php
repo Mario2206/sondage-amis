@@ -25,23 +25,10 @@ class UserController extends Controller{
         Session::clean("error");
         $this->checkPostKeys($_POST, ["pseudo", "email", "password", "password-retype", "firstName", "lastName"]);
 
-
-        $validatePseudo = new StringValidator($_POST['pseudo']);
-        $validatePseudo->checkLength(2, 50);
-
-        $validateEmail = new StringValidator($_POST['email']);
-        $validateEmail
-            ->checkLength(10, 150)
-            ->isEmail();
-    
-        $validatePassword = new StringValidator($_POST['password']);
-        $validatePassword->checkLength(10, 150);
-
-        $validateRetype = new StringValidator($_POST['password-retype']);
-        $validateRetype->checkRetype($_POST['password']);
-
-        if($validatePseudo->getErrors() || $validateEmail->getErrors() || $validatePassword->getErrors() || $validateRetype->getErrors()){
-            $this->redirectWithErrors("/register", "Information incorrect");
+        $validateError = $this->validateInput($_POST);
+        
+        if($validateError){
+            $this->redirectWithErrors("/register", "error");
         }
 
         $uniqueUser = $this->userModel->checkUnique(["email" =>$_POST["email"], "password" =>$_POST["password"]]);
@@ -78,9 +65,7 @@ class UserController extends Controller{
             $verifyPassword->checkPassword($existingUser->password);
 
             if($verifyPassword->getErrors()){
-                $this->render("connexion");
-                echo "Mot de pa sse incorrect";
-                return;
+                $this->redirectWithErrors("/login","Mot de passe incorrect");
             }
 
             Session::set("user", $existingUser);
@@ -88,8 +73,7 @@ class UserController extends Controller{
             $this->redirect("/poll");
 
         }else{
-            $this->render("connexion");
-            echo "Pseudo incorrect";
+            $this->redirectWithErrors("/login","Pseudo incorrect");
             
         }
         
@@ -100,7 +84,35 @@ class UserController extends Controller{
     }
 
     public function accountSet(){
-        
+        Session::clean("error");
+        $this->checkPostKeys($_POST, ["pseudo", "email", "password", "password-retype", "firstName", "lastName"]);
+
+        $this->userModel->_update
+
+
     }
 
+    private function validateInput($user){
+
+        $validatePseudo = new StringValidator($user['pseudo']);
+        $validatePseudo->checkLength(2, 50);
+
+        $validateEmail = new StringValidator($user['email']);
+        $validateEmail
+            ->checkLength(10, 150)
+            ->isEmail();
+    
+        $validatePassword = new StringValidator($user['password']);
+        $validatePassword->checkLength(10, 150);
+
+        $validateRetype = new StringValidator($user['password-retype']);
+        $validateRetype->checkRetype($user['password']);
+
+        return array_merge(
+            $validatePseudo->getErrors(),
+            $validateEmail->getErrors(),
+            $validatePassword->getErrors(),
+            $validateRetype->getErrors()
+        );
+    }
 }
