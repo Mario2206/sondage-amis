@@ -30,15 +30,15 @@
                 </div>
                 <div class="form-group">
                     <label for="pseudo">Votre pseudo :</label>
-                    <input type="text" name="pseudo" class="form-control" placeholder="Pseudo" required="required" autocomplete="off">
+                    <input type="text" name="pseudo" class="form-control" placeholder="2 to 50 chars" required="required" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="email">Votre email :</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">
+                    <input type="email" name="email" class="form-control" placeholder="10 to 150 chars" required="required" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password">Votre mot de passe :</label>
-                    <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+                    <input type="password" name="password" class="form-control" placeholder="10 to 150 chars" required="required" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password-retype">Votre mot de passe :</label>

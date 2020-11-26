@@ -38,8 +38,7 @@ class UserController extends Controller{
         $validateRetype->checkRetype($_POST['password']);
 
         if($validatePseudo->getErrors() || $validateEmail->getErrors() || $validatePassword->getErrors() || $validateRetype->getErrors()){
-            Session::set("error", "Information incorrect");
-            $this->redirect("/register");
+            $this->redirectWithErrors("/register", "Information incorrect");
         }
 
         // Créé une nouvel méthode.
@@ -55,6 +54,7 @@ class UserController extends Controller{
                 $_POST["firstName"],
                 $_POST["lastName"] 
             );
+            $this->redirect("/login");
         }else{
             Session::set("error", "Pseudo ou email incorrect");
             $this->redirect("/register");
