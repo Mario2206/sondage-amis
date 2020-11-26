@@ -77,12 +77,14 @@ class QueryBuilder {
      * For generating filters in query
      * 
      * @param array $filters (only keys)
+     * @param string $operator (AND, OR)
+     * @param bool $isRegex
      * 
      * @return string
      */
-    public static function filters(array $filters, bool $isRegex = false) : string {
-        $filtersQ = array_reduce ($filters, function($acc, $filter) use ($isRegex) {
-            return $acc .= $filter . ($isRegex ? " LIKE " : " = ") . "?" . "AND ";
+    public static function filters(array $filters , bool $isRegex = false, string $operator = "AND") : string {
+        $filtersQ = array_reduce ($filters, function($acc, $filter) use ($isRegex, $operator) {
+            return $acc .= $filter . ($isRegex ? " LIKE " : " = ") . "?" . $operator;
         });
         $filtersQ = trim($filtersQ, "AND ");
         return "WHERE " . $filtersQ;

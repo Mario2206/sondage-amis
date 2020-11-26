@@ -10,6 +10,7 @@ use Exception;
 
 
 class UserController extends Controller{
+    
     private $userModel;
 
     public function __construct(){
