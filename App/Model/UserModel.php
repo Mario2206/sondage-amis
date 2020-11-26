@@ -13,7 +13,7 @@ class UserModel extends Model{
     }
 
     public function checkUnique (array $filters) : bool {
-        $user = $this->_find($filters, ["*"], [0,1], [], false, "OR");
+        $user = $this->_find($filters, ["*"], [], [], false, "OR");
         return $user ? false : true;
     }
 
