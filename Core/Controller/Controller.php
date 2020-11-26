@@ -9,17 +9,43 @@ class Controller {
 
     /**
      * For rendering a view
+     * 
+     * @param string $pageName
+     * @param array $vars (variables to pass to view)
      */
     protected function render (string $pageName, array $vars = []) {
         extract($vars);
         require(__DIR__ . "/../../App/View/$pageName.php");
     } 
 
+    /**
+     * For redirecting to path
+     * 
+     * @param string $path
+     */
     protected function redirect (string $path) {
         header("Location:" . MAIN_PATH . $path);
         die();
     }
 
+    /**
+     * For redirecting to path with error
+     * 
+     * @param string $path 
+     * @param string | string[] $error 
+     */
+    protected function redirectWithErrors (string $path, $error) {
+        Session::set('error', $error);
+        $this->redirect($path);
+    }
+
+    /**
+     * For protecting page for specific role
+     * 
+     * @param string $role 
+     * @param string $redirectionRoute
+     * 
+     */
     protected function protectPageFor (string $role, string $redirectionRoute) {
         if(!Session::get($role)) {
             $this->redirect($redirectionRoute);
