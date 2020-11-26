@@ -10,7 +10,7 @@ class Session  {
     }
 
     public static function get(string $key) {
-        return $_SESSION[$key];
+        return isset($_SESSION[$key]) ?  $_SESSION[$key] : null;
     }
 
     public static function clean (string $key) {
