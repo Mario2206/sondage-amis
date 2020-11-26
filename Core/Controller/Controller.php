@@ -3,7 +3,6 @@
 namespace Core\Controller;
 
 use Core\Tools\Session;
-use Core\View\Template\ITemplate;
 
 class Controller {
 

@@ -9,6 +9,7 @@ use Core\Validator\stringValidator;
 
 
 class UserController extends Controller{
+    
     private $userModel;
 
     public function __construct(){

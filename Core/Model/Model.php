@@ -82,14 +82,14 @@ abstract class Model {
      *
      * return array
      * */
-    protected function _find(array $filters = [], array $wantedValue = ["*"], array $limit = [], array $order = [], bool $isRegex = false) : array {
+    protected function _find(array $filters = [], array $wantedValue = ["*"], array $limit = [], array $order = [], bool $isRegex = false, string $operatorForFilters = "AND") : array {
         $vars = [];
  
         $query = QueryBuilder::select($wantedValue, $this->_tableName);
  
          if($filters) {
  
-             $query .= " " . QueryBuilder::filters(array_keys($filters),$isRegex);
+             $query .= " " . QueryBuilder::filters(array_keys($filters), $isRegex,  $operatorForFilters);
              $vars = array_values($filters);
          }
  
