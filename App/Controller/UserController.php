@@ -6,7 +6,6 @@ use App\Model\UserModel;
 use Core\Controller\Controller;
 use Core\Tools\Session;
 use Core\Validator\stringValidator;
-use Exception;
 
 
 class UserController extends Controller{
@@ -39,7 +38,8 @@ class UserController extends Controller{
         $validateRetype->checkRetype($_POST['password']);
 
         if($validatePseudo->getErrors() || $validateEmail->getErrors() || $validatePassword->getErrors() || $validateRetype->getErrors()){
-            throw new Exception("Erreur lors de l'inscription");
+            Session::set("error", "Information incorrect");
+            $this->redirect("/register");
         }
 
         // Créé une nouvel méthode.
@@ -57,7 +57,7 @@ class UserController extends Controller{
             );
         }else{
             Session::set("error", "Pseudo ou email incorrect");
-            $this->redirect("inscription");
+            $this->redirect("/register");
         }
     }
 
