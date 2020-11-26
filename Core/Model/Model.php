@@ -109,4 +109,53 @@ abstract class Model {
  
      }
 
+     /**
+     * For removing element(s) from db table
+     *
+     * @param string $table
+     * @param array $filters ["KEY"=>"value"]
+     *
+     * return boolean
+     * */
+    protected function _delete(string $table, array $filters) {
+
+        $keyFilters = array_keys($filters);
+
+        $sql = QueryBuilder::delete($table, $keyFilters);
+
+        $req = $this->_db->prepare($sql);
+
+        $req->execute(array_values($filters));
+
+        return $req->rowCount() > 0;
+
+    }
+
+     /**
+     * For updating element(s) from db table
+     * 
+     * @param string $table
+     * @param array $data
+     * @param array $filters
+     * 
+     * return int (number of updated rows)
+     */
+    protected function _update (string $table, array $data, array $filters) : int {
+
+        $dataKeys = array_keys($data);
+        $filterKey = array_keys($filters);
+
+        $query = QueryBuilder::update($table, $dataKeys);
+
+        if($filters) {
+            $query .= " " . QueryBuilder::filters($filterKey);
+        }
+    
+        $preparedArray = array_merge(array_values($data), array_values( $filters ));
+        $req = $this->_db->prepare($query);
+        $req->execute($preparedArray);
+
+        return $req->rowCount();
+    }
+
 }
