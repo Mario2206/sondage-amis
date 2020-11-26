@@ -101,10 +101,10 @@ abstract class Model {
          if($order) {
               $query =" " .  QueryBuilder::order($order["by"], $order["desc"] );
          }
-       
+         
          $req = $this->_db->prepare($query);
          $req->execute($vars);
- 
+         
          return $req->fetchall();
  
      }
@@ -140,12 +140,12 @@ abstract class Model {
      * 
      * return int (number of updated rows)
      */
-    protected function _update (string $table, array $data, array $filters) : int {
+    protected function _update (array $data, array $filters) : int {
 
         $dataKeys = array_keys($data);
         $filterKey = array_keys($filters);
 
-        $query = QueryBuilder::update($table, $dataKeys);
+        $query = QueryBuilder::update($this->_tableName, $dataKeys);
 
         if($filters) {
             $query .= " " . QueryBuilder::filters($filterKey);

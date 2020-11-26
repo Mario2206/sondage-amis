@@ -86,7 +86,7 @@ class QueryBuilder {
         $filtersQ = array_reduce ($filters, function($acc, $filter) use ($isRegex, $operator) {
             return $acc .= $filter . ($isRegex ? " LIKE " : " = ") . "?" . " $operator ";
         });
-        $filtersQ = trim($filtersQ, "AND ");
+        $filtersQ = trim($filtersQ, "$operator ");
         return "WHERE " . $filtersQ;
     }
 
