@@ -101,10 +101,10 @@ abstract class Model {
          if($order) {
               $query =" " .  QueryBuilder::order($order["by"], $order["desc"] );
          }
-       
+         
          $req = $this->_db->prepare($query);
          $req->execute($vars);
- 
+         
          return $req->fetchall();
  
      }
