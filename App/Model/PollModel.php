@@ -5,7 +5,7 @@ namespace App\Model;
 use Core\Model\Model;
 
 class PollModel extends Model {
-
+        
         const TABLE_NAME = "poll";
 
         const KEYS = ["pollName", "description", "createdAt", "user_id"];

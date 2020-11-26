@@ -14,17 +14,20 @@ use DateTime;
 
 
 class PollController extends Controller {
+    private $user;
 
     public function __construct()
     {
+        $this->user = Session::get("user");
         $this->protectPageFor("user", "/login");
     }
 
     public function pollListPage () {
-
         $pollModel = new PollModel();
-        $polls = $pollModel->find(["idUser"=>$user->userId]);
+        $polls = $pollModel->find(["idUser"=>$this->user->idUser]);
         $this->render("pollListView", compact("polls"));
+        $username = $this->user->username;
+        echo "<script>alert(\"Bienvenue $username \")</script>";
     } 
 
     public function createPollPage () {

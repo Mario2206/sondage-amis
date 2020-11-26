@@ -7,61 +7,17 @@
 </head>
 <body>
     <div>
-        <?php
-            if(isset($_GET['reg_err'])){
-                $err = htmlspecialchars($_GET['reg_err']);
 
-                switch($err){
-                    case 'success':
-                    ?>
-                        <div>
-                            <strong>Succès</strong> inscription réussie !
-                        </div>
-                    <?php
-                    break;
+        <?php if($error):?>
 
-                    case 'password':
-                    ?>
-                        <div>
-                            <strong>Erreur</strong> mot de passe différent
-                        </div>
-                    <?php
-                    break;
+        <div>
+            <p>
+                <?= $error ?>
+            </p>
+        </div>
+        
+        <?php endif;?>
 
-                    case 'email':
-                    ?>
-                        <div>
-                            <strong>Erreur</strong> email non valide
-                        </div>
-                    <?php
-                    break;
-
-                    case 'email_length':
-                    ?>
-                        <div>
-                            <strong>Erreur</strong> email trop long
-                        </div>
-                    <?php
-                    break;
-
-                    case 'pseudo_length':
-                    ?>
-                        <div>
-                            <strong>Erreur</strong> pseudo trop long
-                        </div>
-                    <?php
-                    
-
-                    case 'already':
-                    ?>
-                        <div>
-                            <strong>Erreur</strong> compte deja existant
-                        </div>
-                    <?php
-                    
-                }
-            }
-        ?>
         <form action="<?= MAIN_PATH."/register" ?>" method="post">
                 <h2 class="text-center">Inscription</h2>       
                 <div class="form-group">

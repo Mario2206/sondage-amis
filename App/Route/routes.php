@@ -27,6 +27,10 @@ try {
 
     $router->post("/login", "UserController", "login");
 
+    $router->get("/poll/myAccount", "UserController", "accountPage");
+
+    $router->post("/poll/myAccount", "UserController", "accountSet");
+
     $router->parse();
 
 

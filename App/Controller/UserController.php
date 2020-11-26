@@ -17,7 +17,8 @@ class UserController extends Controller{
     }   
 
     public function registerPage() {
-        $this->render("inscription");
+        $error = Session::get("error");
+        $this->render("inscription", compact("error"));
 
     }
     public function register(){
@@ -41,18 +42,23 @@ class UserController extends Controller{
             throw new Exception("Erreur lors de l'inscription");
         }
 
-        
-        $existedUser = $this->userModel->findOne(["username" =>$_POST["pseudo"], "email" =>$_POST["email"]]);
-        if(!$existedUser){
+        // Créé une nouvel méthode.
+        $existedUsername = $this->userModel->findOne(["username" =>$_POST["pseudo"]]);
+        $existedEmail = $this->userModel->findOne(["email" =>$_POST["email"]]);
+
+        if(!$existedUsername && !$existedEmail){
             $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
             $result = $this->userModel->save(
                 $_POST["pseudo"],
                 $_POST["email"],
                 $passwordHash,
                 $_POST["firstName"],
-                $_POST["lastName"]
+                $_POST["lastName"] 
             );
-        }  // reponse si l'utilisateur existe déjà
+        }else{
+            Session::set("error", "Pseudo ou email incorrect");
+            $this->redirect("inscription");
+        }
     }
 
     public function loginPage(){
@@ -70,7 +76,9 @@ class UserController extends Controller{
             $verifyPassword->checkPassword($existingUser->password);
 
             if($verifyPassword->getErrors()){
-                throw new Exception("mot de passe incorrect");
+                $this->render("connexion");
+                echo "Mot de pa sse incorrect";
+                return;
             }
 
             Session::set("user", $existingUser);
@@ -78,8 +86,19 @@ class UserController extends Controller{
             $this->redirect("/poll");
 
         }else{
-            throw new Exception("pseudo incorrect");
+            $this->render("connexion");
+            echo "Pseudo incorrect";
+            
         }
         
     }
+
+    public function accountPage(){
+        $this->render("myAccount");
+    }
+
+    public function accountSet(){
+        
+    }
+
 }
