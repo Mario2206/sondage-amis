@@ -22,7 +22,9 @@ class UserController extends Controller{
 
     }
     public function register(){
+        Session::clean("error");
         $this->checkPostKeys($_POST, ["pseudo", "email", "password", "password-retype", "firstName", "lastName"]);
+
 
         $validatePseudo = new StringValidator($_POST['pseudo']);
         $validatePseudo->checkLength(2, 50);
@@ -42,11 +44,10 @@ class UserController extends Controller{
             $this->redirectWithErrors("/register", "Information incorrect");
         }
 
-        // Créé une nouvel méthode.
-        $existedUsername = $this->userModel->findOne(["username" =>$_POST["pseudo"]]);
-        $existedEmail = $this->userModel->findOne(["email" =>$_POST["email"]]);
+        $uniqueUser = $this->userModel->checkUnique(["email" =>$_POST["email"], "password" =>$_POST["password"]]);
+        
 
-        if(!$existedUsername && !$existedEmail){
+        if($uniqueUser){
             $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
             $result = $this->userModel->save(
                 $_POST["pseudo"],
