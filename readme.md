@@ -20,4 +20,4 @@
 Par exemple, si le serveur pointe sur un dossier "/www/" et que le projet se trouve à l'intèrieur de ce même dossier "/www/", on a donc :
 $projectDir = "/www/myproject/public"
 
-** ATTENTION A NE PAS METTRE DE "/" après "public" **
+**ATTENTION A NE PAS METTRE DE "/" après "public"**
