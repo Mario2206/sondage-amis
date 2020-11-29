@@ -26,8 +26,8 @@ class UserModel extends Model{
         return $this->_insert(["username", "email", "password", "firstName", "lastName"],[$pseudo, $email, $password, $firstName, $lastName]);
     }
 
-    public function update(){
-        return $this->_update($tableName)
+    public function update(array $data, array $filters){
+        return $this->_update($data, $filters);
     }
 
 

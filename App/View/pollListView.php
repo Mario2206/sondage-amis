@@ -6,6 +6,9 @@ use Core\View\Template\Template;
 ob_start() 
 
 ?>
+    <nav style="width: 100%; height: 50px; background-color: rgb(0, 0, 0, 20%)">
+        <a style="position: absolute; right: 30px; top: 10px; font-size: large; color: black; text-decoration: none" href="<?= MAIN_PATH . "/poll/myAccount" ?>">My account</a>
+    </nav>
     <h1>Liste de vos sondages</h1>
 
     <?php 

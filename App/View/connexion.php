@@ -43,7 +43,7 @@
         <form action="<?= MAIN_PATH."/login" ?>" method="post">
             <h2>Connexion</h2>
             <div>
-                <input type="text" name="pseudo" placeholder="Pseudo" required="required">
+                <input type="text" name="username" placeholder="Pseudo" required="required">
             </div>
             <div>
                 <input type="password" name="password" placeholder="Mot de passe" required="required" autocomplete="off">

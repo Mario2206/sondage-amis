@@ -23,7 +23,7 @@ class UserController extends Controller{
     }
     public function register(){
         Session::clean("error");
-        $this->checkPostKeys($_POST, ["pseudo", "email", "password", "password-retype", "firstName", "lastName"]);
+        $this->checkPostKeys($_POST, ["username", "email", "password", "password-retype", "firstName", "lastName"]);
 
         $validateError = $this->validateInput($_POST);
         
@@ -37,7 +37,7 @@ class UserController extends Controller{
         if($uniqueUser){
             $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
             $result = $this->userModel->save(
-                $_POST["pseudo"],
+                $_POST["username"],
                 $_POST["email"],
                 $passwordHash,
                 $_POST["firstName"],
@@ -55,9 +55,9 @@ class UserController extends Controller{
     }
 
     public function login(){
-        $this->checkPostKeys($_POST, ["pseudo", "password"]);
+        $this->checkPostKeys($_POST, ["username", "password"]);
         
-        $existingUser = $this->userModel->findOne(["username" =>$_POST["pseudo"]]);
+        $existingUser = $this->userModel->findOne(["username" =>$_POST["username"]]);
 
         if($existingUser){
 
@@ -80,21 +80,33 @@ class UserController extends Controller{
     }
 
     public function accountPage(){
-        $this->render("myAccount");
+        $error = Session::get("error");
+        $this->render("myAccount", compact("error"));
     }
 
     public function accountSet(){
         Session::clean("error");
-        $this->checkPostKeys($_POST, ["pseudo", "email", "password", "password-retype", "firstName", "lastName"]);
+        $this->checkPostKeys($_POST, ["username", "email", "password", "password-retype", "firstName", "lastName"]);
 
-        $this->userModel->_update
+        $validateError = $this->validateInput($_POST);
+        
+        if($validateError){
+            $this->redirectWithErrors("/poll/myAccount", "error");
+        }
+
+        $user = Session::get("user");
+        $idUser = $user->idUser;
+        $postFilter = \array_filter($_POST, function($key){
+            return $key != "password-retype";
+        }, ARRAY_FILTER_USE_KEY);
+        $this->userModel->update($postFilter,["idUser" =>$idUser]);
 
 
     }
 
     private function validateInput($user){
 
-        $validatePseudo = new StringValidator($user['pseudo']);
+        $validatePseudo = new StringValidator($user['username']);
         $validatePseudo->checkLength(2, 50);
 
         $validateEmail = new StringValidator($user['email']);

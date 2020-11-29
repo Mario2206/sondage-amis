@@ -9,7 +9,7 @@
 
 <body>
     <h1>Vous pouvez changer ici vos informations</h1>
-    <form action="<?= MAIN_PATH . "/register" ?>" method="post">   
+    <form action="<?= MAIN_PATH . "/poll/myAccount" ?>" method="post">   
             <div class="form-group">
                 <label for="firstName">Votre nom :</label>
                 <input type="text" name="firstName" class="form-control" placeholder="First name" required="required" autocomplete="off">
@@ -19,8 +19,8 @@
                 <input type="text" name="lastName" class="form-control" placeholder="Last name" required="required" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="pseudo">Votre pseudo :</label>
-                <input type="text" name="pseudo" class="form-control" placeholder="2 to 50 chars" required="required" autocomplete="off">
+                <label for="username">Votre pseudo :</label>
+                <input type="text" name="username" class="form-control" placeholder="2 to 50 chars" required="required" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="email">Votre email :</label>
