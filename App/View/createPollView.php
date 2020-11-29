@@ -8,10 +8,20 @@ ob_start()
 
     <main class="container-fluid d-flex flex-column align-items-center">
         <h1>Créer son sondage</h1>
-        <form action="<?=  MAIN_PATH ?>poll/creation" class="col-6 d-flex flex-column align-items-center poll-form" method="POST">
+        <form action="<?=  MAIN_PATH . POLL_CREATION ?>" class="col-6 d-flex flex-column align-items-center poll-form" method="POST">
             <div class="poll-container-form--input-wrapper py-4">
                 <label for="poll_name">Nom du sondage</label>
                 <input type="text" id="poll_name" name="poll_name">
+            </div>
+            <div class="d-flex">
+                <div class="px-3">
+                    <label for="poll_available">Disponible le</label>
+                    <input type="datetime-local" name="poll_available" id="poll_available">
+                </div>
+                <div class="px-3">
+                    <label for="poll_unavailable">Indisponible le</label>
+                    <input type="datetime-local" name="poll_unavailable" id="poll_unavailable">
+                </div>
             </div>
             <div class="d-flex flex-column w-100 py-4">
                 <label for="poll_description " class="text-center">Description du sondage</label>

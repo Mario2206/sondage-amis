@@ -10,11 +10,17 @@
     <title><?= $templateTitle ?></title>
 </head>
 <body>
-    <?= $content ?>
+    <?php
+        require(ROOT . "/App/View/inc/header.php");
+    ?>
+    <main class="py-5 container-fluid">
+       <?= $content ?> 
+    </main>
+    
     
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <?= array_reduce($templateScripts, function ($acc , $script) {
-        return $acc .= '<script src="'. MAIN_PATH . 'js/' . $script . '.js"></script>';
+        return $acc .= '<script src="'. MAIN_PATH . '/js/' . $script . '.js"></script>';
     }) 
     ?>
 </body>

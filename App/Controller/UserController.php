@@ -49,6 +49,7 @@ class UserController extends Controller{
 
         if($uniqueUser){
             $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
+
             $result = $this->userModel->save(
                 $_POST["pseudo"],
                 $_POST["email"],
@@ -56,7 +57,11 @@ class UserController extends Controller{
                 $_POST["firstName"],
                 $_POST["lastName"] 
             );
+
+            if(!$result) $this->redirectWithErrors("/login", "Server Error");
+
             $this->redirect("/login");
+
         }else{
             Session::set("error", "Pseudo ou email incorrect");
             $this->redirect("/register");
