@@ -1,45 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+use Core\View\Template\Template;
 
-<body>
+ob_start() 
+
+?>
     <div>
         <?php
-                if(isset($_GET['login_err'])){
-                    $err = htmlspecialchars($_GET['login_err']);
-                    switch($err){
-                        case 'password' :
-                                ?>
-                            <div>
-                                <strong>Erreur</strong> mot de passe incorrect
-                            </div>
-                            <?php
-                            break;
-                        
-                        case 'pseudo' :
+            if(isset($_GET['login_err'])){
+                $err = htmlspecialchars($_GET['login_err']);
+                switch($err){
+                    case 'password' :
                             ?>
-                            <div>
-                                <strong>Erreur</strong> pseudo incorrect
-                            </div>
-                            <?php
-                            break;
-                        
-                        case 'already' :
-                            ?>
-                            <div>
-                                <strong>Erreur</strong> compte non existant
-                            </div>
-                            <?php
-                            break;
-                    }
+                        <div>
+                            <strong>Erreur</strong> mot de passe incorrect
+                        </div>
+                        <?php
+                        break;
+                    
+                    case 'pseudo' :
+                        ?>
+                        <div>
+                            <strong>Erreur</strong> pseudo incorrect
+                        </div>
+                        <?php
+                        break;
+                    
+                    case 'already' :
+                        ?>
+                        <div>
+                            <strong>Erreur</strong> compte non existant
+                        </div>
+                        <?php
+                        break;
                 }
+            }
+        ?>
 
-            ?>
         <form action="<?= MAIN_PATH."/login" ?>" method="post">
             <h2>Connexion</h2>
             <div>
@@ -58,6 +55,8 @@
             </a>
         </p>
     </div>
-</body>
-
-</html>
+<?php 
+$content = ob_get_clean();
+$temp = new Template("Création de sondages", ["create-poll"]);
+$temp->render($content);
+?>

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+
+use Core\View\Template\Template;
+
+ob_start() 
+
+?>
     <div>
 
         <?php if($error):?>
@@ -49,5 +48,8 @@
                 </div>   
         </form>
     </div>
-</body>
-</html>
+<?php 
+$content = ob_get_clean();
+$temp = new Template("Liste des sondages");
+$temp->render($content);
+?>

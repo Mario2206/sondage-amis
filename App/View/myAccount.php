@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon compte</title>
-</head>
+use Core\View\Template\Template;
 
-<body>
-    <h1>Vous pouvez changer ici vos informations</h1>
+ob_start() 
+
+?>
+    <nav style="width: 100%; height: 50px; background-color: rgb(0, 0, 0, 20%)">
+        <a style="position: absolute; left: 30px; top: 10px; font-size: large; color: black; text-decoration: none" href="<?= MAIN_PATH . "/poll" ?>">Poll list</a>
+    </nav>
+    <h1>Mon compte</h1>
+    <h3>Vous pouvez changer ici vos informations :</h3>
     <form action="<?= MAIN_PATH . "/poll/myAccount" ?>" method="post">   
             <div class="form-group">
                 <label for="firstName">Votre nom :</label>
@@ -38,6 +39,9 @@
                 <button type="submit" class="btn btn-primary btn-block">Valider les changements</button>
             </div>   
     </form>
-</body>
-
-</html>
+    
+<?php 
+    $content = ob_get_clean();
+    $temp = new Template("Liste des sondages");
+    $temp->render($content);
+?>
