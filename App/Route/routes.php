@@ -3,33 +3,37 @@
 
 use Core\Router\Router;
 
+require(ROOT ."/App/Constant/routes.php");
+
 try {
     
     $router = new Router($_GET["url"]);
 
     $router->setControllerNameSpace("App\\Controller\\");
 
-    $router->get("/", "HomeController", "homepage");
+    $router->get(HOME, "HomeController", "homepage");
 
-    $router->get("/poll", "PollController", "pollListPage");
+    $router->get(POLL_LIST, "CreatePollController", "pollListPage");
 
-    $router->get("/poll/creation", "PollController", "createPollPage");
+    $router->get(POLL_CREATION, "CreatePollController", "createPollPage");
 
-    $router->post("/poll/creation", "PollController", "createPoll");
+    $router->post(POLL_CREATION, "CreatePollController", "createPoll");
 
-    $router->get("/poll/created", "PollController", "confirmCreatePollPage");
+    $router->get(POLL_CREATED, "CreatePollController", "confirmCreatePollPage");
 
-    $router->get("/register", "UserController", "registerPage");
+    $router->get(POLL_REPORT . "/:poll_id", "PollReportController", "getPollReport");
 
-    $router->post("/register", "UserController", "register");
+    $router->get(REGISTER, "UserController", "registerPage");
 
-    $router->get("/login", "UserController", "loginPage");
+    $router->post(REGISTER, "UserController", "register");
 
-    $router->post("/login", "UserController", "login");
+    $router->get(LOGIN, "UserController", "loginPage");
 
-    $router->get("/poll/myAccount", "UserController", "accountPage");
+    $router->post(LOGIN, "UserController", "login");
 
-    $router->post("/poll/myAccount", "UserController", "accountSet");
+    $router->get(ACCOUNT, "UserController", "accountPage");
+
+    $router->post(ACCOUNT, "UserController", "accountSet");
 
     $router->parse();
 

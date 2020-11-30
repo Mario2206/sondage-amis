@@ -13,7 +13,7 @@ use Core\Validator\ArrayValidator;
 use DateTime;
 
 
-class PollController extends Controller {
+class CreatePollController extends Controller {
     private $user;
 
     public function __construct()
@@ -25,9 +25,8 @@ class PollController extends Controller {
     public function pollListPage () {
         $pollModel = new PollModel();
         $polls = $pollModel->find(["idUser"=>$this->user->idUser]);
-        $this->render("pollListView", compact("polls"));
-        $username = $this->user->username;
-        echo "<script>alert(\"Bienvenue $username \")</script>";
+        $currentDate = date(TypeConverter::DATE_FORMAT);
+        $this->render("pollListView", compact("polls", "currentDate"));
     } 
 
     public function createPollPage () {
@@ -39,10 +38,10 @@ class PollController extends Controller {
     }
 
     public function createPoll() {
-        //TEMP
-        $user_id = 0;
+        
+        $user = Session::get("user");
       
-        $this->checkPostKeys($_POST, ["poll_name", "poll_description", "poll_questions", "poll_responses"]);
+        $this->checkPostKeys($_POST, ["poll_name", "poll_description", "poll_questions", "poll_responses", "poll_available", "poll_unavailable"]);
 
         if(count($_POST["poll_responses"]) !== count($_POST["poll_questions"])) {
             throw new \Exception("It must have poll questions as much as poll responses group");
@@ -61,6 +60,8 @@ class PollController extends Controller {
         $date = TypeConverter::stringifyDate(new DateTime());
         $pollName = Cleaner::cleanHtml($_POST["poll_name"]);
         $pollDescription = Cleaner::cleanHtml($_POST['poll_description']);
+        $pollAvailableDate = $_POST["poll_available"];
+        $pollUnAvailableDate = $_POST["poll_unavailable"];
 
         
         $pollQuestions = Cleaner::cleanArray( $pollQuestionsValidation->getValues() );
@@ -68,7 +69,7 @@ class PollController extends Controller {
 
     
         $pollModel = new PollModel();
-        $pollId = $pollModel->insert($pollName, $pollDescription, $date, $user_id);
+        $pollId = $pollModel->insert($pollName, $pollDescription, $date, $user->idUser, $pollAvailableDate, $pollUnAvailableDate);
 
         if($pollId) {
 
@@ -91,7 +92,7 @@ class PollController extends Controller {
                 }
                 
             }
-            $this->redirect(MAIN_PATH . "poll/created");
+            $this->redirect(\POLL_CREATED);
         } 
         else {
             throw new \Exception("The poll hasn't been created");
