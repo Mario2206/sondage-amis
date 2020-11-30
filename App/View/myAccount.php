@@ -5,12 +5,9 @@ use Core\View\Template\Template;
 ob_start() 
 
 ?>
-    <nav style="width: 100%; height: 50px; background-color: rgb(0, 0, 0, 20%)">
-        <a style="position: absolute; left: 30px; top: 10px; font-size: large; color: black; text-decoration: none" href="<?= MAIN_PATH . "/poll" ?>">Poll list</a>
-    </nav>
     <h1>Mon compte</h1>
     <h3>Vous pouvez changer ici vos informations :</h3>
-    <form action="<?= MAIN_PATH . "/poll/myAccount" ?>" method="post">   
+    <form action="<?= MAIN_PATH . ACCOUNT ?>" method="post">   
             <div class="form-group">
                 <label for="firstName">Votre nom :</label>
                 <input type="text" name="firstName" class="form-control" placeholder="First name" required="required" autocomplete="off">

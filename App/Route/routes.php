@@ -23,17 +23,17 @@ try {
 
     $router->get(POLL_REPORT . "/:poll_id", "PollReportController", "getPollReport");
 
-    $router->get(REGISTER, "UserController", "registerPage");
+    $router->get(REGISTER, "RegisterController", "registerPage");
 
-    $router->post(REGISTER, "UserController", "register");
+    $router->post(REGISTER, "RegisterController", "register");
 
-    $router->get(LOGIN, "UserController", "loginPage");
+    $router->get(LOGIN, "LoginController", "loginPage");
 
-    $router->post(LOGIN, "UserController", "login");
+    $router->post(LOGIN, "LoginController", "login");
 
-    $router->get(ACCOUNT, "UserController", "accountPage");
+    $router->get(ACCOUNT, "AccountController", "accountPage");
 
-    $router->post(ACCOUNT, "UserController", "accountSet");
+    $router->post(ACCOUNT, "AccountController", "accountSet");
 
     $router->parse();
 

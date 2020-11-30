@@ -6,7 +6,7 @@ const HOME = "/";
 
 const REGISTER = "/register";
 const LOGIN = "/login";
-const ACCOUNT = "my-account";
+const ACCOUNT = "/poll/myAccount";
 
 // POLL ROUTES
 const POLL_LIST = "/poll";
