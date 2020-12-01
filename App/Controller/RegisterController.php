@@ -12,11 +12,9 @@ use Core\Tools\Session;
 class RegisterController extends Controller{
 
     private $userModel;
-    private $userForm;
 
     public function __construct(){
         $this->userModel = new UserModel();
-        $this->userForm = new UserForm();
     }   
 
     public function registerPage() {
@@ -25,10 +23,10 @@ class RegisterController extends Controller{
 
     }
     public function register(){
-        Session::clean("error");
-        $this->checkPostKeys($_POST, ["username", "email", "password", "password-retype", "firstName", "lastName"]);
-
-        $validateError = $this->userForm->validateInput($_POST);
+        
+        $userForm = new UserForm($_POST);
+        $userForm->validate();
+        $validateError = $userForm->getErrors();
         
         if($validateError){
             $this->redirectWithErrors("/register", "error");

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ConnectUserForm;
 use App\Model\UserModel;
 use Core\Controller\Controller;
 use Core\Tools\Session;
@@ -22,7 +23,9 @@ class LoginController extends Controller{
     }
 
     public function login(){
-        $this->checkPostKeys($_POST, ["username", "password"]);
+        
+        $connectForm = new ConnectUserForm($_POST);
+        $connectForm->validate();
         
         $existingUser = $this->userModel->findOne(["username" =>$_POST["username"]]);
 

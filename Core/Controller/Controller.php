@@ -6,6 +6,7 @@ use Core\Tools\Session;
 
 class Controller {
 
+
     /**
      * For rendering a view
      * 
@@ -14,6 +15,7 @@ class Controller {
      */
     protected function render (string $pageName, array $vars = []) {
         extract($vars);
+        $error = Session::getError();
         require(__DIR__ . "/../../App/View/$pageName.php");
     } 
 
@@ -34,7 +36,7 @@ class Controller {
      * @param string | string[] $error 
      */
     protected function redirectWithErrors (string $path, $error) {
-        Session::set('error', $error);
+        Session::setError($error);
         $this->redirect($path);
     }
 
@@ -48,21 +50,6 @@ class Controller {
     protected function protectPageFor (string $role, string $redirectionRoute) {
         if(!Session::get($role)) {
             $this->redirect($redirectionRoute);
-        }
-    }
-
-
-     /*
-     * @param $post : array
-     * @param $requiredKeys : array
-     *
-     * return boolean
-     * */
-    protected function checkPostKeys(array $post, array $requiredKeys) : void {
-        $postKeys = array_keys($post);
-        $diff = array_diff($requiredKeys, $postKeys);
-        if(count($diff) !== 0) {
-            throw new \Exception("Post keys are missing", 400);
         }
     }
 

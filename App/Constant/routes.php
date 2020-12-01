@@ -9,6 +9,12 @@ const LOGIN = "/login";
 const ACCOUNT = "/myAccount";
 
 
+//POLL CUSTOMER ROUTE 
+
+const POLL_LIST_FRIENDS = "/poll/friends";
+const POLL_RESPONSE = "/poll/response";
+const POLL_RESPONSE_START = "/poll/response/start";
+
 // POLL ROUTES
 const POLL_LIST = "/poll";
 const POLL_CREATION = "/poll/creation";

@@ -17,4 +17,19 @@ class Session  {
         unset($_SESSION[$key]);
     }
 
+    public static function setError(string $error) {
+        self::set("error",$error);
+    }
+
+    /**
+     * For getting error from session and clean once it's done
+     * 
+     * @return string | null 
+     */
+    public static function getError() {
+        $error = self::get("error");
+        self::clean("error");
+        return $error;
+    }
+
 }

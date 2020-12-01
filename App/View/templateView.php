@@ -10,19 +10,10 @@
     <title><?= $templateTitle ?></title>
 </head>
 <body>
+
     <?php
         require(ROOT . "/App/View/inc/header.php");
     ?>
-
-    <!-- ERROR -->
-    <?php if(isset($error)) : ?>
-
-        <div class="alert alert-danger">
-            <?= $error ?>
-        </div>
-
-    <?php endif; ?>
-
 
     <main class="py-5 container-fluid">
        <?= $content ?> 

@@ -22,9 +22,14 @@ class ArrayValidator {
     }
 
     public function noEmptyValue() : self {
-        foreach($this->_value as $val) {
-            if(empty($val)) return $this->_errors[] = "A value in array is empty";
-        }
+        $key = count($this->_value);
+
+         array_walk_recursive($this->_value, function($val)  use ($key) {
+             if(!$val) {
+                $this->_errors[$key] = "Array is empty"; 
+             }
+        });
+
         return $this;
     }
 
