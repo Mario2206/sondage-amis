@@ -11,11 +11,13 @@ try {
 
     $router->setControllerNameSpace("App\\Controller\\");
 
-    // HOME
+    //HOME
+
     $router->get(HOME, "HomeController", "homepage");
 
-    // POLL
-    $router->get(POLL_LIST, "CreatePollController", "pollListPage");
+    // POLL ROUTES
+
+    $router->get(POLL_LIST, "PollController", "pollList");
 
     $router->get(POLL_CREATION, "CreatePollController", "createPollPage");
 
@@ -23,7 +25,13 @@ try {
 
     $router->get(POLL_CREATED, "CreatePollController", "confirmCreatePollPage");
 
-    $router->get(POLL_REPORT . "/:poll_id", "PollReportController", "getPollReport");
+    $router->get(POLL_REPORT . "/:poll_id", "PollManagerController", "getPollReport");
+
+    $router->get(POLL_CLOSE . "/:poll_id", "PollManagerController", "closePoll");
+
+    $router->post(POLL_OPEN . "/:poll_id", "PollManagerController", "openPoll");
+
+    //USER ROUTES
 
     // USER
     $router->get(REGISTER, "RegisterController", "registerPage");

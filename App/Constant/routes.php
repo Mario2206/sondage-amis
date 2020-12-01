@@ -21,3 +21,5 @@ const FRIENDS = "/friends";
 
 
 
+const POLL_CLOSE = "/poll/close";
+const POLL_OPEN = "/poll/open";
