@@ -2,9 +2,10 @@
 
 namespace Core\Model\Converters;
 
+
 class TypeConverter {
 
-    const DATE_FORMAT = "Y-m-j H:m:s";
+    const DATE_FORMAT = "Y-m-j H:i:s";
 
     public static function stringifyDate ( \DateTime $date) {
         return $date->format(self::DATE_FORMAT);
@@ -13,5 +14,6 @@ class TypeConverter {
     public static function convertToDate(string $date) {
         return new \DateTime($date);
     }
+
 
 }

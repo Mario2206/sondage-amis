@@ -47,7 +47,16 @@ class PollModel extends Model {
             return $this->_find($filters, $wantedValue, $limit, $order);
         }
 
-        public function getPollAndRef(string $pollId) {
+        /**
+         * 
+         * For getting the poll with its questions and answers
+         * 
+         * @param string $pollId 
+         * 
+         * @return array
+         * 
+         */
+        public function getPollAndRef(string $pollId) : array {
 
             $poll = $this->_find(["idPoll" => $pollId]);
 
@@ -61,6 +70,10 @@ class PollModel extends Model {
                 "poll" => $poll[0], 
                 "questions" =>  $formatedQuestions
             ];
+        }
+
+        public function update(array $data, string $pollId, string $userId) : int {
+            return $this->_update($data, ["idPoll" => $pollId, "idUser" => $userId]);
         }
         
 
