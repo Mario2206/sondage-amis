@@ -13,7 +13,9 @@ ob_start();
         <p>
             <?= $poll->description; ?>
         </p>
-        <a href="#" class='btn btn-primary'>Commencer à répondre !</a>
+        <a href="<?= MAIN_PATH . POLL_RESPONSE . "/" . $poll->idPoll ?>" class='btn btn-primary'>
+            Commencer à répondre !
+        </a>
     </section>
 
 <?php 

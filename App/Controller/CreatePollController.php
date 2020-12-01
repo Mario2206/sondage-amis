@@ -63,7 +63,7 @@ class CreatePollController extends Controller {
 
             foreach($pollQuestions as $k=>$question) {
 
-                $qId = $questionModel->insert($pollId, htmlspecialchars( $question ));
+                $qId = $questionModel->insert($pollId, htmlspecialchars( $question ), $k);
 
                 if($qId) {
                     

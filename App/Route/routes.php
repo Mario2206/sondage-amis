@@ -22,6 +22,8 @@ try {
 
     $router->get(POLL_RESPONSE_START . "/:poll_id", "PollResponseController", "startPage");
 
+    $router->get(POLL_RESPONSE . "/:poll_id", "PollResponseController", "pageForAnswers");
+
     $router->get(POLL_RESPONSE . "/:poll_id/:question_number", "PollResponseController", "getQuestion");
 
     // POLL ROUTES (OWNER)

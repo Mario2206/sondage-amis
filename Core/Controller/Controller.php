@@ -17,7 +17,16 @@ class Controller {
         extract($vars);
         $error = Session::getError();
         require(__DIR__ . "/../../App/View/$pageName.php");
-    } 
+    }
+    
+    /**
+     * For sending json data to the client 
+     * 
+     * @param $content 
+     */
+    protected function renderJson ($content) {
+        echo json_encode($content);
+    }
 
     /**
      * For redirecting to path

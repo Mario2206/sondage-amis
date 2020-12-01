@@ -25,7 +25,7 @@ ob_start()
                     <h6 class="card-subtitle mb-2 text-muted">Créé le : <?= $poll->createdAt ?></h6>
                     <p class="card-text"><?= $poll->description ?></p>
                     
-                    <a href="<?= MAIN_PATH . POLL_RESPONSE . "/" . $poll->idPoll ?>" class="btn btn-primary">Répondre</a>
+                    <a href="<?= MAIN_PATH . POLL_RESPONSE_START . "/" . $poll->idPoll ?>" class="btn btn-primary">Répondre</a>
                     <div class="d-flex flex-row justify-content-between">
                         <p>
                             Disponible jusqu'à : <span><?= $poll->unAvailableAt ?></span>
