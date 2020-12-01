@@ -22,7 +22,6 @@ class PollReportController extends Controller {
 
         $this->render("poll-report", compact("poll", "questions"));
 
-
     }
 
 }

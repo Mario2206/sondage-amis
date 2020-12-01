@@ -62,6 +62,4 @@ class PollModel extends Model {
                 "questions" =>  $formatedQuestions
             ];
         }
-        
-
     }

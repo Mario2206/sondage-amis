@@ -11,8 +11,10 @@ try {
 
     $router->setControllerNameSpace("App\\Controller\\");
 
+    // HOME
     $router->get(HOME, "HomeController", "homepage");
 
+    // POLL
     $router->get(POLL_LIST, "CreatePollController", "pollListPage");
 
     $router->get(POLL_CREATION, "CreatePollController", "createPollPage");
@@ -23,6 +25,7 @@ try {
 
     $router->get(POLL_REPORT . "/:poll_id", "PollReportController", "getPollReport");
 
+    // USER
     $router->get(REGISTER, "RegisterController", "registerPage");
 
     $router->post(REGISTER, "RegisterController", "register");
@@ -34,6 +37,11 @@ try {
     $router->get(ACCOUNT, "AccountController", "accountPage");
 
     $router->post(ACCOUNT, "AccountController", "accountSet");
+
+    // FRIENDS
+    $router->get(FRIENDS, "FriendsController", "friendsPage");
+
+
 
     $router->parse();
 

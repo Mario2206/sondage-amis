@@ -35,9 +35,6 @@ class AccountController extends Controller{
         }
 
         $user = Session::get("user");
-
-        // $passwordHash = password_hash($_POST["password"], PASSWORD_BCRYPT);
-
         
         $idUser = $user->idUser;
         $postFilter = \array_filter($_POST, function($key){
