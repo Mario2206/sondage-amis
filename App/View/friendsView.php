@@ -3,7 +3,9 @@
 use Core\View\Template\Template;
 
 ob_start();
+
 ?>
+
 <table class="table">
   <thead class="thead-light">
     <tr>
@@ -11,23 +13,25 @@ ob_start();
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Mark</td>
-    </tr>
-    <tr>
-      <td>Jacob</td>
-    </tr>
-    <tr>
-      <td>Larry</td>
-    </tr>
+
+  <?php
+
+    foreach ($friend as $key => $value) {
+
+    ?>
+
+      <tr>
+        <td>Mark</td>
+      </tr>
+
+      <?php
+
+    }
+
+  ?>
+
   </tbody>
 </table>
-
-
-
-
-
-
 
 
 <?php 

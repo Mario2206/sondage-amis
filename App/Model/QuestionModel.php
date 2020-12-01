@@ -17,6 +17,6 @@ class QuestionModel extends Model {
         return $this->_insert(self::KEYS, func_get_args());
     }
 
-
+    
 
 }

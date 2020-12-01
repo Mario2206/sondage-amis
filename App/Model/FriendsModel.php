@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Core\Model\Converters\ArrayMapper;
 use Core\Model\Model;
+use PDO;
 
 class FriendsModel extends Model{
 
@@ -21,14 +22,10 @@ class FriendsModel extends Model{
     }
 
     public function getFriends($userId){
-        $friends = $this->_find(["idUser" => $userId]);
+        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
 
-        $req = $this->_db->prepare["SELECT friends.idUser, friends.idFriend FROM friends WHERE idUser = :id_user "];
-        $req->execute(["id_user" =>$userId]);
-        $friendsName = $req->fetchAll();
+        $answer = $bdd->query('SELECT idUser, idFriend FROM friends WHERE idUser = :id_user');
 
-        
+        return $answer;
     }
-
-
 }
