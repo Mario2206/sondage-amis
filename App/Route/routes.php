@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Controller\CreatePollController;
+use App\Exceptions\CreatePollException;
 use Core\Router\Router;
 
 require(ROOT ."/App/Constant/routes.php");
@@ -15,9 +16,17 @@ try {
 
     $router->get(HOME, "HomeController", "homepage");
 
-    // POLL ROUTES
+    //POLL ROUTE (SUBMITTER)
 
-    $router->get(POLL_LIST, "PollController", "pollList");
+    $router->get(POLL_LIST_FRIENDS, "PollListController", "pollListFromFriends");
+
+    $router->get(POLL_RESPONSE_START . "/:poll_id", "PollResponseController", "startPage");
+
+    $router->get(POLL_RESPONSE . "/:poll_id/:question_number", "PollResponseController", "getQuestion");
+
+    // POLL ROUTES (OWNER)
+
+    $router->get(POLL_LIST, "PollListController", "pollList");
 
     $router->get(POLL_CREATION, "CreatePollController", "createPollPage");
 
@@ -46,13 +55,9 @@ try {
     $router->post(ACCOUNT, "AccountController", "accountSet");
 
     $router->parse();
-
-
-
-
-    
-
-} catch(Exception $e) {
+   
+} 
+catch(Exception $e) {
     echo "<strong>Error : $e</strong>";
 }
 

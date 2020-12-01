@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\OpenPollForm;
 use App\Model\PollModel;
 use Core\Controller\Controller;
 use Core\Model\Converters\TypeConverter;
@@ -18,9 +19,18 @@ class PollManagerController extends Controller {
         $this->user = Session::get("user");
         $this->protectPageFor("user", "/login");
         $this->pollModel = new PollModel();
+        
     }
 
+    /**
+     * GET : display poll report page
+     * 
+     * @param string $idPoll
+     */
+
     public function getPollReport( string $idPoll) {
+
+        $this->protectAgainstCheat($idPoll);
 
         $dataPoll = $this->pollModel->getPollAndRef($idPoll);
         $poll = $dataPoll["poll"]; 
@@ -31,7 +41,14 @@ class PollManagerController extends Controller {
 
     }
 
+    /**
+     * GET : Close poll
+     * 
+     * @param string $pollId
+     */
     public function closePoll(string $pollId) {
+
+        $this->protectAgainstCheat($pollId);
         
         $closeDate = TypeConverter::stringifyDate(new DateTime());
         $res = $this->pollModel->update(["unAvailableAt" => $closeDate], $pollId, $this->user->idUser);
@@ -45,9 +62,18 @@ class PollManagerController extends Controller {
         }
     }
 
+    /**
+     * POST : Open poll
+     * 
+     * @param string $pollId
+     */
     public function openPoll(string $pollId) {
-        $this->checkPostKeys($_POST, ["availableAt", "unAvailableAt"]);
-        
+
+        $this->protectAgainstCheat($pollId);
+
+        $openPollForm = new OpenPollForm($_POST);
+        $openPollForm->validate();
+       
         $res = $this->pollModel->update(
             ["availableAt"=>$_POST["availableAt"], "unAvailableAt" => $_POST["unAvailableAt"]],
             $pollId,  
@@ -55,13 +81,27 @@ class PollManagerController extends Controller {
          );
 
          if($res) {
-             var_dump($res);
-             die();
              $this->redirect(POLL_LIST);
          }
+         
          $this->redirectWithErrors(POLL_LIST, "Erreur lors de l'ouverture du sondage");
 
 
+    }
+
+    /**
+     * For blocking a lambda user who tries to modify a poll which isn't his
+     * (redirect on poll list route)
+     * 
+     * @param string $pollId
+     */
+
+    private function protectAgainstCheat(string $pollId) {
+        $poll = $this->pollModel->find(["idPoll" => $pollId, "idUser"=>$this->user->idUser]);
+
+        if(!$poll) {
+            $this->redirect(POLL_LIST);
+        }
     }
 
 }

@@ -3,31 +3,28 @@
 namespace App\Form;
 
 use Core\Controller\Controller;
+use Core\Validator\AbstractForm;
 use Core\Validator\StringValidator;
 
-class UserForm extends Controller{
+class UserForm extends AbstractForm{
 
-    public function validateInput($user){
+    public function validate(){
 
-        $validatePseudo = new StringValidator($user['username']);
+        $this->checkPostKeys($this->formValues, ["username", "email", "password", "password-retype", "firstName", "lastName"]);
+
+        $validatePseudo = new StringValidator($this->formValues['username']);
         $validatePseudo->checkLength(2, 50);
 
-        $validateEmail = new StringValidator($user['email']);
+        $validateEmail = new StringValidator($this->formValues['email']);
         $validateEmail
             ->checkLength(10, 150)
             ->isEmail();
 
-        $validatePassword = new StringValidator($user['password']);
+        $validatePassword = new StringValidator($this->formValues['password']);
         $validatePassword->checkLength(10, 150);
 
-        $validateRetype = new StringValidator($user['password-retype']);
-        $validateRetype->checkRetype($user['password']);
+        $validateRetype = new StringValidator($this->formValues['password-retype']);
+        $validateRetype->checkRetype($this->formValues['password']);
 
-        return array_merge(
-            $validatePseudo->getErrors(),
-            $validateEmail->getErrors(),
-            $validatePassword->getErrors(),
-            $validateRetype->getErrors()
-        );
     }
 }

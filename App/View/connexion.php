@@ -6,36 +6,8 @@ ob_start()
 
 ?>
     <div>
-        <?php
-            if(isset($_GET['login_err'])){
-                $err = htmlspecialchars($_GET['login_err']);
-                switch($err){
-                    case 'password' :
-                            ?>
-                        <div>
-                            <strong>Erreur</strong> mot de passe incorrect
-                        </div>
-                        <?php
-                        break;
-                    
-                    case 'pseudo' :
-                        ?>
-                        <div>
-                            <strong>Erreur</strong> pseudo incorrect
-                        </div>
-                        <?php
-                        break;
-                    
-                    case 'already' :
-                        ?>
-                        <div>
-                            <strong>Erreur</strong> compte non existant
-                        </div>
-                        <?php
-                        break;
-                }
-            }
-        ?>
+        
+        <?php require_once(ROOT."\App\View\inc\alert-error.php");  ?>
 
         <form action="<?= MAIN_PATH."/login" ?>" method="post">
             <h2>Connexion</h2>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\PollForm;
 use App\Model\AnswerModel;
 use App\Model\PollModel;
 use App\Model\QuestionModel;
@@ -9,9 +10,7 @@ use Core\Controller\Controller;
 use Core\Model\Converters\TypeConverter;
 use Core\Tools\Cleaner;
 use Core\Tools\Session;
-use Core\Validator\ArrayValidator;
 use DateTime;
-
 
 class CreatePollController extends Controller {
 
@@ -33,22 +32,14 @@ class CreatePollController extends Controller {
 
     public function createPoll() {
         
-        $user = Session::get("user");
-      
-        $this->checkPostKeys($_POST, ["poll_name", "poll_description", "poll_questions", "poll_responses", "poll_available", "poll_unavailable"]);
-
-        if(count($_POST["poll_responses"]) !== count($_POST["poll_questions"])) {
-            throw new \Exception("It must have poll questions as much as poll responses group");
-        }
-
-        $pollQuestionsValidation = new ArrayValidator($_POST["poll_questions"]);
-        $pollQuestionsValidation->noEmptyValue();
         
-        $pollResponseValidation = new ArrayValidator($_POST["poll_responses"]);
-        $pollResponseValidation->noEmptyValue();
+      
+        $pollForm = new PollForm($_POST);
 
-        if($pollQuestionsValidation->getErrors() || $pollResponseValidation->getErrors()) {
-            throw new \Exception("Some questions or answers are empty");
+        $pollForm->validate();
+
+        if($pollForm->getErrors()) {
+            $this->redirectWithErrors(POLL_CREATION, "Erreur lors de la création du sondage, certains champs ne sont pas correctement complétés" );
         }
 
         $date = TypeConverter::stringifyDate(new DateTime());
@@ -58,12 +49,12 @@ class CreatePollController extends Controller {
         $pollUnAvailableDate = $_POST["poll_unavailable"];
 
         
-        $pollQuestions = Cleaner::cleanArray( $pollQuestionsValidation->getValues() );
-        $pollResponses = Cleaner::cleanArray( array_values($pollResponseValidation->getValues()) );
+        $pollQuestions = Cleaner::cleanArray( $_POST["poll_questions"]);
+        $pollResponses = Cleaner::cleanArray( array_values($_POST["poll_responses"]));
 
     
         $pollModel = new PollModel();
-        $pollId = $pollModel->insert($pollName, $pollDescription, $date, $user->idUser, $pollAvailableDate, $pollUnAvailableDate);
+        $pollId = $pollModel->insert($pollName, $pollDescription, $date, $this->user->idUser, $pollAvailableDate, $pollUnAvailableDate);
 
         if($pollId) {
 

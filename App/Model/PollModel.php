@@ -48,6 +48,30 @@ class PollModel extends Model {
         }
 
         /**
+         * For getting all poll created by user's friends and which are available
+         * 
+         * @param string $userId
+         * 
+         * @return array
+         */
+        public function findPollFromFriends (string $userId) {
+            
+            $req = $this->_db->prepare("
+            SELECT poll.idPoll, poll.availableAt, poll.unAvailableAt, poll.createdAt, poll.description, poll.pollName, users.username 
+            FROM poll 
+            INNER JOIN friends ON friends.idFriend = poll.idUser 
+            INNER JOIN users ON friends.idFriend = users.idUser
+            WHERE friends.idUser = ? AND poll.availableAt < NOW() AND poll.unAvailableAt > NOW()
+            ");
+
+            $req->execute([$userId]);
+
+            $polls = $req->fetchAll();
+
+            return $polls;
+        }
+
+        /**
          * 
          * For getting the poll with its questions and answers
          * 
