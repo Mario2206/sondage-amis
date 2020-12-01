@@ -31,8 +31,6 @@ try {
 
     $router->post(POLL_OPEN . "/:poll_id", "PollManagerController", "openPoll");
 
-    //USER ROUTES
-
     // USER
     $router->get(REGISTER, "RegisterController", "registerPage");
 
@@ -52,11 +50,6 @@ try {
 
 
     $router->parse();
-
-
-
-
-    
 
 } catch(Exception $e) {
     echo "<strong>Error : $e</strong>";

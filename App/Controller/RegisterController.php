@@ -9,7 +9,7 @@ use Core\Tools\Session;
 
 
 
-class AccountController extends Controller{
+class RegisterController extends Controller{
 
     private $userModel;
     private $userForm;
