@@ -32,7 +32,6 @@ class CreatePollController extends Controller {
 
     public function createPoll() {
         
-        
       
         $pollForm = new PollForm($_POST);
 
@@ -45,7 +44,7 @@ class CreatePollController extends Controller {
         $date = TypeConverter::stringifyDate(new DateTime());
         $pollName = Cleaner::cleanHtml($_POST["poll_name"]);
         $pollDescription = Cleaner::cleanHtml($_POST['poll_description']);
-        $pollAvailableDate = $_POST["poll_available"];
+        $pollAvailableDate =  $_POST["poll_available"];
         $pollUnAvailableDate = $_POST["poll_unavailable"];
 
         

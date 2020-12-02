@@ -84,7 +84,13 @@ class PollModel extends Model {
 
             $poll = $this->_find(["idPoll" => $pollId]);
 
-            $req = $this->_db->prepare("SELECT questions.question, questions.idQuestion, answers.answer, answers.nVoter FROM questions INNER JOIN answers ON questions.idQuestion = answers.questionId WHERE idPoll = :id_poll ");
+            $req = $this->_db->prepare("
+            SELECT questions.question, questions.idQuestion, answers.answer, COUNT(`user-answers`.idAnswer) AS nVoter FROM questions 
+            INNER JOIN answers ON questions.idQuestion = answers.questionId 
+            LEFT JOIN `user-answers` ON `user-answers`.idAnswer = answers.answerId
+            WHERE idPoll = :id_poll 
+            GROUP BY answers.answerId
+            ");
             
             $req->execute(["id_poll"=>$pollId]);
             $questions = $req->fetchAll();

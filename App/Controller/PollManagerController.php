@@ -32,12 +32,10 @@ class PollManagerController extends Controller {
 
         $this->protectAgainstCheat($idPoll);
 
-        $dataPoll = $this->pollModel->getPollAndRef($idPoll);
-        $poll = $dataPoll["poll"]; 
-        $questions = $dataPoll["questions"];
+        $poll = $this->pollModel->find(["idPoll"=>$idPoll]);
         $currentDate = TypeConverter::stringifyDate(new DateTime());
         
-        $this->render("poll-report", compact("poll", "questions", "currentDate"));
+        $this->render("poll-report", ["poll" => $poll[0], "currentDate" => $currentDate]);
 
     }
 

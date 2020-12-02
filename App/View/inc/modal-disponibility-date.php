@@ -15,11 +15,11 @@ function ModalDisponibilityDate (string $pollId) {
                     <div class="modal-body">
                             <div>
                                 <label for="available-date">Disponible le</label>
-                                <input type="datetime-local" name="availableAt" id="available-date"/>
+                                <input type="date" name="availableAt" id="available-date"/>
                             </div>
                             <div>
                                 <label for="unavailable-date">Indisponbile dès</label>
-                                <input type="datetime-local" name="unAvailableAt" id="unavailable-date"/>
+                                <input type="date" name="unAvailableAt" id="unavailable-date"/>
                             </div>
                     </div>
                     <div class="modal-footer">

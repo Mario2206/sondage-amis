@@ -22,11 +22,11 @@ ob_start()
                 <div class="d-flex">
                     <div class="px-3">
                         <label for="poll_available">Disponible le</label>
-                        <input type="datetime-local" name="poll_available" id="poll_available">
+                        <input type="date" name="poll_available" id="poll_available">
                     </div>
                     <div class="px-3">
                         <label for="poll_unavailable">Indisponible le</label>
-                        <input type="datetime-local" name="poll_unavailable" id="poll_unavailable">
+                        <input type="date" name="poll_unavailable" id="poll_unavailable">
                     </div>
                 </div>
                 <div class="d-flex flex-column w-100 py-4">
