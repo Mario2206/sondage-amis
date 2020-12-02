@@ -47,4 +47,9 @@ class LoginController extends Controller{
             
         } 
     }
+
+    public function logout() {
+        Session::clean("user");
+        $this->redirect(HOME);
+    }
 }

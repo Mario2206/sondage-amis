@@ -41,6 +41,19 @@ class PollManagerController extends Controller {
 
     }
 
+    public function getResultsOfPoll(string $idPoll) {
+        $this->protectAgainstCheat($idPoll);
+
+        $dataPoll = $this->pollModel->getPollAndRef($idPoll);
+        $poll = $dataPoll["poll"]; 
+        $questions = $dataPoll["questions"];
+        $currentDate = TypeConverter::stringifyDate(new DateTime());
+
+        $this->renderJson(["poll" => $poll, "questions" => $questions, "currentDate" =>$currentDate], HTTP_GOOD_REQ);
+
+
+    }
+
     /**
      * GET : Close poll
      * 

@@ -7,6 +7,7 @@ const HOME = "/";
 const REGISTER = "/register";
 const LOGIN = "/login";
 const ACCOUNT = "/poll/myAccount";
+const LOG_OUT = "/logout";
 
 //POLL CUSTOMER ROUTE 
 
@@ -19,6 +20,7 @@ const POLL_LIST = "/poll";
 const POLL_CREATION = "/poll/creation";
 const POLL_CREATED = "/poll/created";
 const POLL_REPORT = "/poll/report";
+const POLL_REPORT_DETAILS = "/poll/report/details";
 const POLL_CLOSE = "/poll/close";
 const POLL_OPEN = "/poll/open";
 const POLL_CHAT = "/poll/chat";

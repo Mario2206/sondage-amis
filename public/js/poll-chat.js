@@ -7,20 +7,28 @@ function displayMessages() {
         dataType : "Json"
     })
     .done((res) => {
-
+       
         const messagesHTML = res.map((mess) => (`
-            <div>
-                <p>
-                    ${mess.value}
+            <div class="d-flex flex-column bg-light p-3 rounded my-1">
+                <p class="align-self-start">
+                    ${mess.message}
                 </p>
-                <span>
-                    ${mess.author}
+                <span class="align-self-end">
+                    ${mess.username}
                 </span>
             </div>
         `))
 
         $("#poll-chat").html(messagesHTML.join(""))
 
+        //AUTO SCROLL DOWN FOR MESSAGES CONTAINER
+
+        $("#poll-chat").scrollTop($('#poll-chat').prop('scrollHeight'))
+
+    })
+
+    .fail (()=> {
+        alert("Les messages ne se sont pas correctement synchronisés ! ")
     })
 
 }
@@ -35,7 +43,18 @@ $('#poll-chat-form').submit( (e) => {
         method : "POST",
         data : { "poll-message" : message}
     })
-    .done(()=> {
+    .done((res)=> {
+        
         displayMessages();
     })
+    .fail(() => {
+        alert("Une erreur est survenue lors de l'ajout du message")
+    })
 })
+
+displayMessages()
+
+//START TO SIMULATE SOCKET
+
+setInterval(displayMessages, 5000)
+

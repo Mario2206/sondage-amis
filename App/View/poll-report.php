@@ -40,47 +40,16 @@ ob_start();
     </div>
 </header>
 <section class="d-flex flex-column align-items-center">
+   
     <?php
         require_once(ROOT . "\App\View\inc\modal-disponibility-date.php");
         ModalDisponibilityDate($poll->idPoll);
     ?>
-    <?php foreach($questions as $q=>$res) : ?>
 
-        <article class="py-5">
-
-            <h2 class="py-4">
-
-                <?= $q?>
-
-            </h2>
-
-            <ul class="list-group">
-
-                <?php foreach($res as $answer) : ?>
-
-                    <li class="list-group-item d-flex flex-column">
-
-                        <p>
-
-                            <?= $answer["answer"] ?>
-
-                        </p>
-
-                        <strong class="align-self-end">
-
-                            Nombre de votants : <?= $answer["nVoter"] ?>
-
-                        </strong>
-
-                    </li>
-
-                <?php endforeach; ?>
-
-            </ul>
-
-        </article>
-
-    <?php endforeach; ?>
+    <!-- CONTAINER RESULTS -->
+    <div class="d-flex flex-column align-items-center" id="container-results">
+         <input type="hidden" value="<?= $poll->idPoll ?>" id="poll-id"/>
+    </div>
 
     <section class="py-3 my-5 h-50 w-100 border border-dark">
 
@@ -90,9 +59,11 @@ ob_start();
 
         </header>
 
-        <div>
-            <!-- MESSAGES -->
-        </div>
+        <div id="poll-chat" class="border overflow-auto" style="height:50vh"></div>
+        <form action="<?= MAIN_PATH . POLL_CHAT_MESSAGE . "/" . $poll->idPoll  ?>" class="d-flex justify-content-center py-3 " id="poll-chat-form">
+            <input type="text" placeholder="Envoyer un message" class="p-2" name="poll-message">
+            <button type="submit" class="btn btn-primary mx-3">Envoyer</button>
+        </form>
 
     </section>
 
@@ -108,5 +79,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$temp = new Template($poll->pollName);
+$temp = new Template($poll->pollName, ["poll-chat", "poll-report"]);
 $temp->render($content);

@@ -36,7 +36,8 @@ class ChatController extends Controller {
     }
 
     public function getMessages($idPoll) {
-
+        $messages = $this->messagesModel->findAllMessages($idPoll);
+        $this->renderJson($messages, HTTP_GOOD_REQ);
     }
 
     public function postMessage($idPoll) {

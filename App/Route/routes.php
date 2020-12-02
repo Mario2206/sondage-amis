@@ -16,6 +16,8 @@ try {
 
     $router->get(HOME, "HomeController", "homepage");
 
+   
+
     //POLL ROUTE (SUBMITTER)
 
     $router->get(POLL_LIST_FRIENDS, "PollListController", "pollListFromFriends");
@@ -40,6 +42,8 @@ try {
 
     $router->get(POLL_REPORT . "/:poll_id", "PollManagerController", "getPollReport");
 
+    $router->get(POLL_REPORT_DETAILS . "/:poll_id", "PollManagerController", "getResultsOfPoll");
+
     $router->get(POLL_CLOSE . "/:poll_id", "PollManagerController", "closePoll");
 
     $router->post(POLL_OPEN . "/:poll_id", "PollManagerController", "openPoll");
@@ -50,7 +54,7 @@ try {
 
     $router->get(POLL_CHAT_MESSAGE . "/:poll_id", "ChatController", "getMessages");
 
-    $router->post(POLL_CHAT_MESSAGE . "/:poll_id", "ChatController", "postMessages");
+    $router->post(POLL_CHAT_MESSAGE . "/:poll_id", "ChatController", "postMessage");
 
     //USER ROUTES
 
@@ -65,6 +69,8 @@ try {
     $router->get(ACCOUNT, "AccountController", "accountPage");
 
     $router->post(ACCOUNT, "AccountController", "accountSet");
+
+    $router->get(LOG_OUT, "LoginController", "logout");
 
     $router->parse();
    

@@ -2,6 +2,11 @@ const pollId = $("#poll-response-form").data("poll-id");
 let idQuestion = 0;
 let currentQuestion = 1
 
+/**
+ * DISPLAY END COMPONENT (WHEN POLL IS OVER)
+ * 
+ * @param string testContent
+ */
 function displayEndComponent(textContent) {
     $("#content-page").html(`
         <h1>
@@ -85,7 +90,7 @@ function sendAnswer (answer) {
     })
     
     .done((res)=> {
-        console.log(res);
+        
         currentQuestion = res.nextQuestion
 
         if(currentQuestion) {
@@ -98,6 +103,7 @@ function sendAnswer (answer) {
     })
     .fail((err)=> {
         console.log(err.responseText);
+        alert("La réponse ne s'est pas correctement envoyée")
     })
 
 }
