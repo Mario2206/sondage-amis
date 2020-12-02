@@ -23,8 +23,9 @@ const POLL_REPORT = "/poll/report";
 
 // FRIENDS ROUTES
 const FRIENDS = "/friends";
-
-
+const FRIENDS_ACCEPT = "/friends/accept";
+const FRIENDS_REJECT = "/friends/reject";
+const FRIENDS_REMOVE = "/friend/remove";
 
 
 const POLL_CLOSE = "/poll/close";

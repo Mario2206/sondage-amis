@@ -53,7 +53,16 @@ try {
 
     $router->post(ACCOUNT, "AccountController", "accountSet");
 
+    // FRIENDS
     $router->get(FRIENDS, "FriendsController", "friendsPage");
+
+    $router->post(FRIENDS, "FriendsController", "addFriend");
+
+    $router->get(FRIENDS_ACCEPT . "/:friendId", "FriendsController", "acceptFriend");
+
+    $router->get(FRIENDS_REJECT . "/:friendId", "FriendsController", "rejectFriend");
+
+    $router->get(FRIENDS_REMOVE . "/:friendId", "FriendController", "removeFriend");
 
     $router->parse();
    

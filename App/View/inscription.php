@@ -18,7 +18,7 @@ ob_start()
         <?php endif;?>
 
         <form action="<?= MAIN_PATH."/register" ?>" method="post">
-                <h2 class="text-center">Inscription</h2>       
+                <h2 class="text-center">Inscription</h2>
                 <div class="form-group">
                     <label for="firstName">Votre nom :</label>
                     <input type="text" name="firstName" class="form-control" placeholder="First name" required="required" autocomplete="off">
