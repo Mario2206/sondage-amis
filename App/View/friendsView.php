@@ -50,7 +50,7 @@ ob_start();
         else:
       ?>
       <td>
-      <a class="btn btn-outline-danger" href="<?= MAIN_PATH . FRIENDS_REMOVE . "/" . $friend->idFriend ?>">Remove</a>
+      <a class="btn btn-outline-danger" href="<?= MAIN_PATH . FRIENDS_REJECT . "/" . $friend->idFriend ?>">Remove</a>
       </td>
   </tr>
 

@@ -81,9 +81,6 @@ try {
 
     $router->get(FRIENDS_REJECT . "/:friendId", "FriendsController", "rejectFriend");
 
-    $router->get(FRIENDS_REMOVE . "/:friendId", "FriendController", "removeFriend");
-
-
     $router->parse();
    
 } 
