@@ -20,8 +20,16 @@ const POLL_LIST = "/poll";
 const POLL_CREATION = "/poll/creation";
 const POLL_CREATED = "/poll/created";
 const POLL_REPORT = "/poll/report";
-const POLL_REPORT_DETAILS = "/poll/report/details";
+
+// FRIENDS ROUTES
+const FRIENDS = "/friends";
+const FRIENDS_ACCEPT = "/friends/accept";
+const FRIENDS_REJECT = "/friends/reject";
+const FRIENDS_REMOVE = "/friend/remove";
+
+
 const POLL_CLOSE = "/poll/close";
 const POLL_OPEN = "/poll/open";
+const POLL_REPORT_DETAILS = "/poll/report/details";
 const POLL_CHAT = "/poll/chat";
 const POLL_CHAT_MESSAGE = "/poll/chat/message";
