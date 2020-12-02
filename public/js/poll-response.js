@@ -39,7 +39,7 @@ function displayQuestion (currentQuestion) {
         idQuestion = question[questionKey][0].idQuestion
 
         const answers = question[questionKey].map(answer => `
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center border mx-3">
                 <label for="${answer.answerId}">${answer.answer}</label>
                 <input type="radio" name="poll-answer" value="${answer.answerId}" id="${answer.answerId}" />
             </div>
