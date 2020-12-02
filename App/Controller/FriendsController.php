@@ -30,19 +30,22 @@ class FriendsController extends Controller{
 
         $idUser = $this->user->idUser;
 
-        // $friends = $this->friendsModel->getFriends($idUser);
-
         $varFriend = $this->friendsModel->findFriendId($_POST["username"]);
 
         $idFriend = $varFriend[0]->idUser;
 
-        $friendsYet = $this->friendsModel->friendsYet($idUser, $idFriend);
+        if($_POST["username"] != "" && $idFriend != $idUser){
 
-        if(!$friendsYet){
-            $this->friendsModel->addFriend($idUser, $idFriend);
+            $friendsYet = $this->friendsModel->friendsYet($idUser, $idFriend);
+    
+            if(!$friendsYet){
+                $this->friendsModel->addFriend($idUser, $idFriend);
+            }
         }
 
         $this->redirect(FRIENDS);
+
+
     }
 
 
@@ -63,15 +66,7 @@ class FriendsController extends Controller{
 
         $this->friendsModel->rejectFriend($idUser, $friendId);
 
- 
+        $this->redirect(FRIENDS);
     }
-
-    public function removeFriend($friendId){
-
-        $idUser = $this->user->idUser;
-
-        $this->friendsModel->rejectFriend($idUser, $friendId);
-    }
-
 
 }
