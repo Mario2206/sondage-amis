@@ -27,3 +27,7 @@ $projectDir = "/www/myproject/public"
 ### Infos supplémentaires 
 
 En important la base de données, vous pourrez trouver des utilisateurs déjà crées. Leurs mots de passe sont tous "password2206"
+
+### Participants
+
+Vauthier Alexandre, Abir Mahrzi, Raimbault Mathieu 
