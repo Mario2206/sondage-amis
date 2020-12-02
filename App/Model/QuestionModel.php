@@ -14,6 +14,12 @@ class QuestionModel extends Model {
         parent::__construct(self::TABLE_NAME);
     }
 
+    public function isExist($filters) {
+        $req = $this->_find($filters, ["COUNT(*) AS response"]);
+
+        return $req[0]->response ? true : false;
+    }
+
     public function insert(string $idPoll, string $questionValue, int $questionOrder) {
         return $this->_insert(self::KEYS, func_get_args());
     }
@@ -34,9 +40,9 @@ class QuestionModel extends Model {
 
         $question = $req->fetchAll();
 
-        $formatedQuestion = ArrayMapper::groupByPropertyOfSubObject("question", $question);
-
-        return $formatedQuestion ? $formatedQuestion : null;
+        $formatedQuestions = ArrayMapper::groupByPropertyOfSubObject("question", ["answer", "answerId", "idQuestion"],  $question);
+        
+        return $formatedQuestions ;
     }
 
 

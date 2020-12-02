@@ -6,7 +6,7 @@ ob_start();
 
 ?>
 
-    <section>
+    <section id="content-page">
         <h1 class="text-center">
             <?= $poll->pollName; ?>
         </h1>

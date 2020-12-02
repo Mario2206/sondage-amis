@@ -8,6 +8,9 @@ session_start();
 //GLOBAL CONFIGURATION FILE
 require("../Configuration/configuration.php");
 
+//CONSTANTS 
+require(ROOT . "\App\Constant\http-codes.php");
+
 //AUTOLOADER FILE
 require("../Core/Autoloader.php");
 

@@ -23,9 +23,12 @@ class Controller {
      * For sending json data to the client 
      * 
      * @param $content 
+     * @param int $statusCode
      */
-    protected function renderJson ($content) {
+    protected function renderJson ($content, int $statusCode) {
+        http_response_code($statusCode);
         echo json_encode($content);
+        die();
     }
 
     /**

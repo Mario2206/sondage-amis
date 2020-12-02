@@ -21,3 +21,5 @@ const POLL_CREATED = "/poll/created";
 const POLL_REPORT = "/poll/report";
 const POLL_CLOSE = "/poll/close";
 const POLL_OPEN = "/poll/open";
+const POLL_CHAT = "/poll/chat";
+const POLL_CHAT_MESSAGE = "/poll/chat/message";

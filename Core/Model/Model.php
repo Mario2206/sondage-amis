@@ -29,7 +29,7 @@ abstract class Model {
     protected function _insert(array $keys, array $data) {
 
         $query = QueryBuilder::insert($this->_tableName, $keys ,[$data]);
-
+       
         $req = $this->_db->prepare($query);
 
         $res = $req ->execute($data);

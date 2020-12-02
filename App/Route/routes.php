@@ -26,6 +26,8 @@ try {
 
     $router->get(POLL_RESPONSE . "/:poll_id/:question_number", "PollResponseController", "getQuestion");
 
+    $router->post(POLL_RESPONSE .  "/:poll_id/:question_number", "PollResponseController", "recieveAnswer");
+
     // POLL ROUTES (OWNER)
 
     $router->get(POLL_LIST, "PollListController", "pollList");
@@ -41,6 +43,14 @@ try {
     $router->get(POLL_CLOSE . "/:poll_id", "PollManagerController", "closePoll");
 
     $router->post(POLL_OPEN . "/:poll_id", "PollManagerController", "openPoll");
+
+    //POLL CHAT
+
+    $router->get(POLL_CHAT . "/:poll_id", "ChatController", "chatPage");
+
+    $router->get(POLL_CHAT_MESSAGE . "/:poll_id", "ChatController", "getMessages");
+
+    $router->post(POLL_CHAT_MESSAGE . "/:poll_id", "ChatController", "postMessages");
 
     //USER ROUTES
 
