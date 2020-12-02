@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 02 déc. 2020 à 22:18
+-- Généré le : mer. 02 déc. 2020 à 22:38
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.12
 
@@ -40,22 +40,14 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`answer`, `questionId`, `answerId`) VALUES
-('Rouge', 1, 1),
-('Vert', 1, 2),
-('Bleu ', 1, 3),
-('Blanc', 1, 4),
-('2', 2, 5),
-('3', 2, 6),
-('4', 2, 7),
-('1', 2, 8),
-('Un Montre', 3, 9),
-('Un hÃ©ro', 3, 10),
-('RÃ©ponse 1', 8, 11),
-('RÃ©ponse 2', 8, 12),
-('RÃ©ponse 3', 8, 13),
-('Une question test', 9, 14),
-('Une super question', 9, 15),
-('La super question', 9, 16);
+('Il est rouge', 1, 1),
+('Il est bleu', 1, 2),
+('Un super hÃ©ros ', 2, 3),
+('Un super mÃ©chant', 2, 4),
+('Oui', 3, 5),
+('Non', 3, 6),
+('Un burger', 4, 7),
+('Des frites', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -74,12 +66,8 @@ CREATE TABLE `friends` (
 --
 
 INSERT INTO `friends` (`idUser`, `idFriend`, `accepted`) VALUES
-(2, 3, 1),
-(3, 2, 1),
-(4, 2, 1),
-(2, 4, 1),
-(5, 2, 1),
-(2, 5, 0);
+(2, 1, 1),
+(1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -102,13 +90,9 @@ CREATE TABLE `poll` (
 --
 
 INSERT INTO `poll` (`idUser`, `pollName`, `description`, `createdAt`, `availableAt`, `unAvailableAt`, `idPoll`) VALUES
-(2, 'Sondage test', 'Une petite description ... ', '2020-12-01 22:42:14', '2020-12-01 22:39:00', '2020-12-02 21:25:40', 2),
-(2, 'Sondage test date', 'La description du sondage test', '2020-12-02 21:17:37', '2020-12-02 00:00:00', '2020-12-02 22:13:54', 3),
-(2, 'Sondage test date', 'La description du sondage test', '2020-12-02 21:18:34', '2020-12-02 00:00:00', '2020-12-20 00:00:00', 4),
-(2, 'Sondage test date', 'La description du sondage test', '2020-12-02 21:19:19', '2020-12-02 00:00:00', '2020-12-20 00:00:00', 5),
-(2, 'Sondage test date', 'La description du sondage test', '2020-12-02 21:20:07', '2020-12-02 00:00:00', '2020-12-02 22:13:50', 6),
-(2, 'Sondage test date', 'La description du sondage test', '2020-12-02 21:22:37', '2020-12-02 00:00:00', '2020-12-02 22:13:48', 7),
-(2, 'Le test du soir', 'Ceci est le tet du soir ', '2020-12-02 22:15:30', '2020-12-02 00:00:00', '2020-12-15 00:00:00', 8);
+(1, 'Les hÃ©ros marvels', 'Un petit sondage sur les hÃ©ros marvels ! ', '2020-12-02 22:30:07', '2020-12-02 00:00:00', '2020-12-09 00:00:00', 1),
+(2, 'Les mathÃ©matiques', 'J\'ai besoin de votre avis !', '2020-12-02 22:35:08', '2020-12-02 00:00:00', '2020-12-18 00:00:00', 2),
+(2, 'Mon repas', 'Un peu d\'aide pour mon repas', '2020-12-02 22:36:15', '2020-12-02 00:00:00', '2020-12-16 00:00:00', 3);
 
 -- --------------------------------------------------------
 
@@ -128,15 +112,10 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`question`, `idQuestion`, `idPoll`, `questionOrder`) VALUES
-('Quelle est la couleur d\'un chat ?', 1, 2, 0),
-('Combien de pattes Ã  un chat ?', 2, 2, 1),
-('Qui est Hulk ?', 3, 2, 2),
-('Quelle est la premiÃ¨re question ?', 4, 3, 0),
-('Quelle est la premiÃ¨re question ?', 5, 4, 0),
-('Quelle est la premiÃ¨re question ?', 6, 5, 0),
-('Quelle est la premiÃ¨re question ?', 7, 6, 0),
-('Quelle est la premiÃ¨re question ?', 8, 7, 0),
-('Quelle est cette question ?', 9, 8, 0);
+('A quoi ressemble spiderman ?', 1, 1, 0),
+('Qui est captain America ?', 2, 1, 1),
+('Vous aimez les maths ?', 3, 2, 0),
+('Demain je mange quoi ?', 4, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -157,32 +136,8 @@ CREATE TABLE `tchatmessages` (
 --
 
 INSERT INTO `tchatmessages` (`message`, `createdAt`, `idUser`, `idPoll`, `idMessage`) VALUES
-('dqzdzq', '2020-12-02 18:01:54', 3, 2, 1),
-('Test', '2020-12-02 18:14:04', 3, 2, 2),
-('Salut bro', '2020-12-02 18:20:39', 4, 2, 3),
-('Ã§a va ?', '2020-12-02 18:20:52', 3, 2, 4),
-('Salut bro', '2020-12-02 18:21:04', 4, 2, 5),
-('Salut bro', '2020-12-02 18:21:04', 4, 2, 6),
-('Salut bro', '2020-12-02 18:21:05', 4, 2, 7),
-('Salut bro', '2020-12-02 18:21:06', 4, 2, 8),
-('Salut bro', '2020-12-02 18:21:06', 4, 2, 9),
-('dzqd', '2020-12-02 18:21:46', 3, 2, 10),
-('dzqdqzdzq', '2020-12-02 18:21:48', 3, 2, 11),
-('dzqdqz', '2020-12-02 18:22:05', 3, 2, 12),
-('dzqdqz', '2020-12-02 18:22:06', 3, 2, 13),
-('dzqdqzqzdzq', '2020-12-02 18:22:10', 3, 2, 14),
-('Salut', '2020-12-02 18:22:16', 3, 2, 15),
-('dzqdq', '2020-12-02 18:24:51', 3, 2, 16),
-('dzqdqdzqdzq', '2020-12-02 18:24:53', 3, 2, 17),
-('qzdz', '2020-12-02 18:28:36', 3, 2, 18),
-('dzqd', '2020-12-02 18:28:41', 4, 2, 19),
-('dzdzq', '2020-12-02 18:37:49', 2, 2, 20),
-('salutpatron', '2020-12-02 18:38:00', 4, 2, 21),
-('salut patron', '2020-12-02 18:38:05', 4, 2, 22),
-('yo', '2020-12-02 20:02:54', 2, 2, 23),
-('Salut !!!', '2020-12-02 20:43:49', 5, 2, 24),
-('Hol', '2020-12-02 22:14:11', 5, 4, 25),
-('Bonjour Ã  tous', '2020-12-02 22:17:45', 2, 8, 26);
+('Merci d\'avoir rÃ©pondu !', '2020-12-02 22:34:13', 1, 1, 1),
+('Merci !', '2020-12-02 22:36:30', 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -201,16 +156,9 @@ CREATE TABLE `user-answers` (
 --
 
 INSERT INTO `user-answers` (`idUser`, `idAnswer`, `idQuestion`) VALUES
-(3, 1, 1),
-(3, 6, 2),
-(3, 9, 3),
-(4, 2, 1),
-(4, 8, 2),
-(4, 9, 3),
-(5, 3, 1),
-(5, 8, 2),
-(5, 10, 3),
-(5, 16, 9);
+(2, 2, 1),
+(2, 3, 2),
+(1, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -232,10 +180,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`firstName`, `lastName`, `email`, `password`, `idUser`, `username`) VALUES
-('MathieuR', 'Raimbault', 'mario@mail.com', '$2y$10$HPPpK.YuNJ9dRgT/4GH53uA6kETzwXuTy.ToNMRJJYwfS1VyX5.4i', 2, 'Mario2206'),
-('Mirtille', 'Mandibule', 'derf@mail.com', '$2y$10$Y9sO6iv32FiFZhds0oOSPennQDcXB1pATsNEDCmNZrnop.w.lOxZS', 3, 'Derf2506'),
-('Lored', 'Prenom', 'markus@mail.com', '$2y$10$oQHJLb6F.u8UO/yX60kJROzQC9gH8zh4IGho0vUSOYGhqjCViqUdi', 4, 'Markus15'),
-('NewUser', 'MyUser', 'toto@mail.com', '$2y$10$HUU.OtwOSqdumoOD55TSheyXxc7VqqIycpZ8N/Gv0H1cOrneBvkeq', 5, 'Toto1510');
+('MarioMars', 'DuPon', 'mario@mail.com', '$2y$10$UgD4prFjyuDHJp2hm8AjheU/.j.jKbQo9IYh.d4G/xPoTykFGX0YW', 1, 'Mario2206'),
+('LeÃ¯la', 'Mirtille', 'derf@mail.com', '$2y$10$wU11d7lkgPWldP8UPwK8QOauMdawXh09Hpr1HMPL/DcOV/UA.wl92', 2, 'Derf2505');
 
 --
 -- Index pour les tables déchargées
@@ -280,31 +226,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `answerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `answerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `poll`
 --
 ALTER TABLE `poll`
-  MODIFY `idPoll` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idPoll` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `idQuestion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idQuestion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `tchatmessages`
 --
 ALTER TABLE `tchatmessages`
-  MODIFY `idMessage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idMessage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

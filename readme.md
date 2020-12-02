@@ -4,6 +4,8 @@
 
 ### Pour la base de données
 
+* Importer la base de données du projet via le fichier sql présent dans Configuration\db
+
 * Aller dans le dossier Configuration\db
 * Créer un fichier dbConfiguration.php
 * Copier-Coller le contenu présent dans dbConfiguration.example.php dans le fichier dbConfiguration.php que vous venez de créer

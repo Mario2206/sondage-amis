@@ -32,6 +32,10 @@ class FriendsController extends Controller{
 
         $varFriend = $this->friendsModel->findFriendId($_POST["username"]);
 
+        if(!$varFriend) {
+            $this->redirect(FRIENDS);
+        }
+
         $idFriend = $varFriend[0]->idUser;
 
         if($_POST["username"] != "" && $idFriend != $idUser){
@@ -43,7 +47,7 @@ class FriendsController extends Controller{
             }
         }
 
-        $this->redirect(FRIENDS);
+        
 
 
     }
