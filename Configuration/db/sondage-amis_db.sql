@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : Dim 29 nov. 2020 à 23:00
--- Version du serveur :  5.7.24
--- Version de PHP : 7.4.12
+-- Host: localhost:3306
+-- Generation Time: Dec 02, 2020 at 10:27 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `sondage_amis`
+-- Database: `sondage-amis`
 --
+CREATE DATABASE IF NOT EXISTS `sondage-amis` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `sondage-amis`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `answers`
+-- Table structure for table `answers`
 --
 
 CREATE TABLE `answers` (
@@ -35,30 +37,25 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `answers`
+-- Dumping data for table `answers`
 --
 
 INSERT INTO `answers` (`answer`, `nVoter`, `questionId`, `answerId`) VALUES
-('17', 0, 1, 1),
-('18', 0, 1, 2),
-('19', 0, 1, 3),
-('Chien', 0, 2, 4),
-('Chat', 0, 2, 5),
-('Hiboux', 0, 2, 6),
-('Steack / Frite', 0, 3, 7),
-('Haricots Verts', 0, 3, 8),
-('La Raclette ', 0, 3, 9),
-('2', 0, 4, 10),
-('3', 0, 4, 11),
-('6', 0, 4, 12),
-('5', 0, 4, 13),
-('qzdzqd', 0, 5, 14),
-('dzqdq', 0, 6, 15);
+('Rouge', 0, 1, 1),
+('Vert', 0, 1, 2),
+('Bleu ', 0, 1, 3),
+('Blanc', 0, 1, 4),
+('2', 0, 2, 5),
+('3', 0, 2, 6),
+('4', 0, 2, 7),
+('1', 0, 2, 8),
+('Un Montre', 0, 3, 9),
+('Un hÃ©ro', 0, 3, 10);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `friends`
+-- Table structure for table `friends`
 --
 
 CREATE TABLE `friends` (
@@ -66,10 +63,18 @@ CREATE TABLE `friends` (
   `idFriend` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`idUser`, `idFriend`) VALUES
+(2, 3),
+(3, 2);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `poll`
+-- Table structure for table `poll`
 --
 
 CREATE TABLE `poll` (
@@ -83,43 +88,38 @@ CREATE TABLE `poll` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `poll`
+-- Dumping data for table `poll`
 --
 
 INSERT INTO `poll` (`idUser`, `pollName`, `description`, `createdAt`, `availableAt`, `unAvailableAt`, `idPoll`) VALUES
-(2, 'Mon sondage test', 'Ceci est un sondage test merci d\'y rÃ©pondre avec soin !!', '2020-11-29 17:11:49', '2020-11-29 21:59:37', '2020-11-29 23:13:23', 2),
-(2, 'Second test de sondage trÃ¨s court', 'Voici un second sondage test !', '2020-11-29 17:11:53', '2020-11-29 23:12:07', '2020-11-29 23:13:23', 3),
-(2, 'Sondage date', '', '2020-11-29 22:11:24', '2020-11-29 23:45:00', '2020-11-30 23:45:00', 4),
-(2, 'Second test', 'dzqdqzd', '2020-11-29 22:11:18', '2020-11-29 23:11:00', '2020-11-30 23:11:00', 5);
+(2, 'Sondage test', 'Une petite description ... ', '2020-12-01 22:42:14', '2020-12-01 22:39:00', '2020-12-10 22:39:00', 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `questions`
+-- Table structure for table `questions`
 --
 
 CREATE TABLE `questions` (
   `question` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `idQuestion` int(11) NOT NULL,
-  `idPoll` int(11) NOT NULL
+  `idPoll` int(11) NOT NULL,
+  `questionOrder` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `questions`
+-- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`question`, `idQuestion`, `idPoll`) VALUES
-('Quel est mon Ã¢ge ?', 1, 2),
-('Quel est mon animal prÃ©fÃ©rÃ© ?', 2, 2),
-('Quel est ton plat le plus dÃ©testÃ© ?', 3, 2),
-('Combien de doigts un Ãªtre humain possÃ¨de ?', 4, 3),
-('dqzdqz', 5, 4),
-('dzqdqzd', 6, 5);
+INSERT INTO `questions` (`question`, `idQuestion`, `idPoll`, `questionOrder`) VALUES
+('Quelle est la couleur d\'un chat ?', 1, 2, 0),
+('Combien de pattes Ã  un chat ?', 2, 2, 1),
+('Qui est Hulk ?', 3, 2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tchatmessages`
+-- Table structure for table `tchatmessages`
 --
 
 CREATE TABLE `tchatmessages` (
@@ -133,7 +133,7 @@ CREATE TABLE `tchatmessages` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -146,80 +146,81 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`firstName`, `lastName`, `email`, `password`, `idUser`, `username`) VALUES
-('Mathieu', 'Raimbault', 'mario@mail.com', '$2y$10$GHy2ydTJ1HvlfcfW.ynes.p7R5uayOSpvKyUlDHbOBVOTTDGnZ3m.', 2, 'Mario2206');
+('Mathieu', 'Raimbault', 'mario@mail.com', '$2y$10$GHy2ydTJ1HvlfcfW.ynes.p7R5uayOSpvKyUlDHbOBVOTTDGnZ3m.', 2, 'Mario2206'),
+('Mirtille', 'Mandibule', 'derf@mail.com', '$2y$10$Y9sO6iv32FiFZhds0oOSPennQDcXB1pATsNEDCmNZrnop.w.lOxZS', 3, 'Derf2506');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `answers`
+-- Indexes for table `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`answerId`);
 
 --
--- Index pour la table `poll`
+-- Indexes for table `poll`
 --
 ALTER TABLE `poll`
   ADD PRIMARY KEY (`idPoll`);
 
 --
--- Index pour la table `questions`
+-- Indexes for table `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`idQuestion`);
 
 --
--- Index pour la table `tchatmessages`
+-- Indexes for table `tchatmessages`
 --
 ALTER TABLE `tchatmessages`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`idUser`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `answers`
+-- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `answerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `answerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pour la table `poll`
+-- AUTO_INCREMENT for table `poll`
 --
 ALTER TABLE `poll`
-  MODIFY `idPoll` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPoll` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `questions`
+-- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `idQuestion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idQuestion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `tchatmessages`
+-- AUTO_INCREMENT for table `tchatmessages`
 --
 ALTER TABLE `tchatmessages`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
