@@ -12,7 +12,7 @@ class QueryBuilder {
      * @return string
      */
     public static function select (array $wantedValues, string $table) : string {
-        return "SELECT " .implode(", ", $wantedValues) . " FROM " . $table ;
+        return "SELECT " .implode(", ", $wantedValues) . " FROM `$table`" ;
     }
 
     /**
@@ -28,7 +28,7 @@ class QueryBuilder {
             return self::insertValues($values);
         }, $groupOfValues);
 
-        return "INSERT INTO " . $table . "(" . implode(", ", $keys) . ") VALUES ". implode(", ", $qGroups);
+        return "INSERT INTO `" . $table . "`(" . implode(", ", $keys) . ") VALUES ". implode(", ", $qGroups);
     }
 
     /**
