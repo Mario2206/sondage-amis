@@ -12,39 +12,45 @@ use Core\Tools\Session;
 class AccountController extends Controller{
 
     private $userModel;
-    private $userForm;
 
     public function __construct(){
         $this->userModel = new UserModel();
-        $this->userForm = new UserForm();
     }   
 
     public function accountPage(){
-        $error = Session::get("error");
-        $this->render("myAccount", compact("error"));
+        $user = Session::get("user");
+        $this->render("myAccount", compact("user"));
     }
 
     public function accountSet(){
-        Session::clean("error");
-        $this->checkPostKeys($_POST, ["username", "email", "password", "password-retype", "firstName", "lastName"]);
 
-        $validateError = $this->userForm->validateInput($_POST);
+        $userForm = new UserForm($_POST);
+        $userForm->validate();
         
-        if($validateError){
-            $this->redirectWithErrors("/poll/myAccount", "error");
+        if($userForm->getErrors()){
+            $this->redirectWithErrors(ACCOUNT, "Les champs rentrés ne sont pas corrects");
         }
 
         $user = Session::get("user");
         
         $idUser = $user->idUser;
+
         $postFilter = \array_filter($_POST, function($key){
             return $key != "password-retype";
         }, ARRAY_FILTER_USE_KEY);
         
         $postFilter["password"] = password_hash($postFilter["password"], PASSWORD_BCRYPT);
 
-        $this->userModel->update($postFilter,["idUser" =>$idUser]);
+        $res = $this->userModel->update($postFilter,["idUser" =>$idUser]);
 
-        $this->redirect(ACCOUNT);
+        if($res) {
+            $user = $this->userModel->findOne(["idUser"=> $user->idUser]);
+            Session::set("user", $user);
+            $this->redirect(ACCOUNT); 
+        }
+
+        $this->redirectWithErrors("Aucune modification enregistrée", HTTP_BAD_REQ);
+
+        
     }
 }

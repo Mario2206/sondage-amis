@@ -26,5 +26,6 @@ class UserForm extends AbstractForm{
         $validateRetype = new StringValidator($this->formValues['password-retype']);
         $validateRetype->checkRetype($this->formValues['password']);
 
+        $this->processValidatorErrors([$validatePseudo, $validateEmail, $validatePassword, $validateRetype]);
     }
 }
