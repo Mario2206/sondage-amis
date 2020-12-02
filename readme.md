@@ -23,3 +23,7 @@ Par exemple, si le serveur pointe sur un dossier "/www/" et que le projet se tro
 $projectDir = "/www/myproject/public"
 
 **ATTENTION A NE PAS METTRE DE "/" après "public"**
+
+### Infos supplémentaires 
+
+En important la base de données, vous pourrez trouver des utilisateurs déjà crées. Leurs mots de passe sont tous "password2206"
